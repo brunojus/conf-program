@@ -1,51 +1,136 @@
 
 from conf_misc import *
 import datetime
-import itertools
+import typing
 from typing import *
 
 __all__ = [
-  'Struct',
   'Program',
   'Conference',
   'Track',
   'Session',
   'Event',
+  'Joint_Event',
+
+  'Session_Builder',
+  'Event_Builder',
+  'Joint_Event_Builder',
 
   'datetime',
 ]
 
 
-class Struct:
+################################################################################
+## types for Conference, Track, Session, Event, ...
+
+class Struct_Meta(type):
+  """
+    Meta class for Struct objects.
+    Injects __slots__ and __init__ built from _fields list.
+  """
+
+  def __new__(clss, clss_name, super_classes, namespace):
+    if super_classes:
+      assert super_classes == (Struct,), 'inheritance nope'
+
+    fields = namespace.setdefault('_fields', ())
+
+    ## inject __slots__ generated from fields
+
+    assert '__slots__' not in namespace
+
+    namespace['__slots__'] = tuple(f[0] for f in fields)
+
+    ## inject __init__ method generated from fields
+
+    assert '__init__' not in namespace
+
+    init_name = f'{clss_name}__init__'
+    init_args = ['self']
+    init_help = []
+    init_body = ''
+
+    locals_  = {}
+    globals_ = dict(globals())
+
+    for field in fields:
+      assert type(field) is tuple
+      assert len(field) in (2, 3)
+
+      field_name = field[0]
+      field_type = field[1]
+
+      assert field_name.isidentifier()
+
+      ty_var  = f"_{field_name}_ty"
+
+      assert ty_var not in globals_, f'duplicate arg {field_name!r}'
+
+      globals_[ty_var] = field_type
+
+      arg = f'{field_name}: {ty_var}'
+
+      if len(field) == 3:
+        field_default = field[2]
+
+        def_var = f"_{field_name}_default"
+
+        globals_[def_var] = field_default
+
+        arg += f' = {def_var}'
+
+      init_args.append(arg)
+      init_help.append(f'{field_name}: {typing._type_repr(field_type)}')
+
+      init_body += f'  self._set_field({field_name!r}, {ty_var}, {field_name})\n'
+
+    init_body += '\n  self._post_init()\n'
+
+    init_signature = f'def {init_name}({", ".join(init_args)}):\n'
+    init_help      = f'  """{clss_name}({", ".join(init_help)})"""\n\n'
+
+    init_code = init_signature + init_help + init_body + '\n'
+
+    # print(init_code)
+    exec(init_code, globals_, locals_)
+
+    namespace['__init__'] = locals_[init_name]
+
+    return type.__new__(clss, clss_name, super_classes, namespace)
+
+
+class Struct(metaclass=Struct_Meta):
+  def _post_init(self):
+    """
+      called at the end of __init__, override if needed.
+    """
+    pass
+
   def __setattr__(self, attr, value):
     raise AttributeError(f"nope, won't let you set {attr} on {type(self).__name__}@{id(self)}")
 
+  def _init_from_dict(self, kwargs: Dict[str, object]):
+    print('!', self._fields)
+
+    for field_name, field_type in self._fields:
+      arg = kwargs.pop(field_name)
+
+      self._set_field(field_name, field_type, arg)
+
+    if kwargs:
+      raise ValueError(f'{type(self).__name__}: too many ctor arguments')
+
   def _set_field(self, attr, ty, value):
-    if not hasattr(type(self), '_fields'):
-      type(self)._fields = ()
-
-    if attr not in self._fields:
-      type(self)._fields += (attr,)
-
     if not type_check(value, ty):
-      raise TypeError(f'cannot set {type(self).__name__}.{attr} to {value!r}, want a {ty.__name__}')
+      raise TypeError(f'cannot set {type(self).__name__}.{attr} to {value!r}, want a {typing._type_repr(ty)}')
 
     if hasattr(self, attr):
       raise TypeError(f'cannot set {type(self).__name__}.{attr}, already set')
 
     object.__setattr__(self, attr, value)
 
-  # def _xinit_from_dict(self, kwargs: Dict[str, object]):
-  #   for field_name, field_type in self._fields:
-  #     arg = kwargs.pop(field_name)
-
-  #     self._set_field(field_name, field_type, arg)
-
-  #   if kwargs:
-  #     raise ValueError(f'{type(self).__name__}: too many ctor arguments')
-
   def _field_tuple(self):
-    return tuple(getattr(self, f) for f in self._fields)
+    return tuple(getattr(self, f) for f in self.__slots__)
 
   def __hash__(self):
     return hash(self._field_tuple())
@@ -55,38 +140,38 @@ class Struct:
       return False
     return self._field_tuple() == that._field_tuple()
 
+  def __str__(self):
+    return f'{type(self).__name__}(...)'
+
   def __repr__(self):
     txt = ''
     txt += type(self).__name__
     txt += '('
-    txt += ', '.join(f'{f}: {getattr(self, f)!r}' for f in self._fields)
+    txt += ', '.join(map(str, self._field_tuple()))
     txt += ')'
     return txt
 
 
 class Conference(Struct):
-  def __init__(self, name: str):
-    self._set_field('name', str, name)
+  _fields = (('name', str),)
 
 
 class Track(Struct):
-  _fields = (('id', str))
-
-  def __init__(self, **kwargs):
-    print('1', kwargs)
-    self._init_from_dict(self, kwargs)
+  _fields = (('id', str),)
 
 
 class Session(Struct):
-  def __init__(self, *, title, track, link,
-               start: datetime.datetime, end,
-               chair: Optional[str]):
-    self._set_field('title', Optional[str], title)
-    self._set_field('track', Track, track)
-    self._set_field('link',  Optional[str], link)
-    self._set_field('start', datetime.datetime, start)
-    self._set_field('end',   Optional[datetime.datetime], end)
-    self._set_field('chair', Optional[str], chair)
+  _fields = (
+    ('track', Track),
+    ('start', datetime.datetime),
+    ('end',   Optional[datetime.datetime], None),
+    ('title', Optional[str], None),
+    ('link',  Optional[str], None),
+    ('chair', Optional[str], None),
+  )
+
+  def _post_init(self):
+    assert not self.link or self.title
 
   @property
   def day(self):
@@ -94,13 +179,20 @@ class Session(Struct):
 
 
 class Event(Struct):
-  def __init__(self, title: str, link,
-               start, end, people):
-    self._set_field('title',  str, title)
-    self._set_field('link',   Optional[str], link)
-    self._set_field('start',  Optional[datetime.datetime], start)
-    self._set_field('end',    Optional[datetime.datetime], end)
-    self._set_field('people', str, people)
+  _fields = (
+    ('title',   str),
+    ('session', Session),
+    ('people',  Optional[str], None),
+    ('link',    Optional[str], None),
+    ('start',   Optional[datetime.datetime], None),
+    ('end',     Optional[datetime.datetime], None),
+  )
+
+  def _post_init(self):
+    assert not self.link or self.title
+
+    assert (self.start is None) or (self.start >= self.session.start)
+    assert (self.end   is None) or (self.end   <= self.session.end)
 
   @property
   def day(self):
@@ -110,20 +202,100 @@ class Event(Struct):
 
 
 class Joint_Event(Struct):
-  def __init__(self, title: str, link: str,
-               start: datetime.datetime, end, people):
-    assert not link or title, f'Joint_Event has link ({link!r}), but no title'
+  _fields = (
+    ('start',  datetime.datetime),
+    ('title',  Optional[str], None),
+    ('end',    Optional[datetime.datetime], None),
+    ('link',   Optional[str], None),
+    ('people', Optional[str], None),
+  )
 
-    self._set_field('title',  str, title)
-    self._set_field('link',   str, link)
-    self._set_field('start',  datetime.datetime, start)
-    self._set_field('end',    Optional[datetime.datetime], end)
-    self._set_field('people', str, people)
+  def _post_init(self):
+    assert not self.link or not self.people or self.title
 
   @property
   def day(self):
     return self.start.date()
 
+
+################################################################################
+## builer APIs
+
+class Track_Builder:
+  def __init__(self, *, sessions = (), **fields):
+    self.sessions = sessions or []
+    self.fields   = fields
+
+  def session(self, **kwargs):
+    sess = Session_Builder(**kwargs)
+    self.sessions.append(sess)
+    return sess
+
+  def build(self, program, conference: Conference) -> Track:
+    track = program.add_track(conference)
+
+    for sess in self.sessions:
+      if type(sess) is not Session_Builder:
+        raise TypeError(f'wanted an Event, got a {type(sess).__name__}')
+
+      sess.build(program, track)
+
+    return sess
+
+
+class Session_Builder:
+  def __init__(self, *, events = (), **fields):
+    self.events  = events or []
+    self.fields  = fields
+
+  def event(self, **kwargs):
+    evt = Event_Builder(**kwargs)
+    self.events.append(evt)
+    return evt
+
+  def build(self, program, track: Track) -> Session:
+    sess = Session(track=track, **self.fields)
+    program._add_session(sess)
+
+    for evt in self.events:
+      if type(evt) is not Event_Builder:
+        raise TypeError(f'wanted an Event, got a {type(evt).__name__}')
+
+      evt.build(program, sess)
+
+    return sess
+
+
+class Event_Builder:
+  def __init__(self, **fields):
+    self.fields = fields
+
+  def build(self, program, session: Session) -> Event:
+    fields = dict(self.fields)
+
+    fields['people'] = ', '.join(fields.get('people', []))
+
+    evt = Event(session=session, **fields)
+    program._add_event(evt)
+    return evt
+
+
+class Joint_Event_Builder:
+  def __init__(self, **fields):
+    self.fields = fields
+
+  def build(self, program) -> Joint_Event:
+    fields = dict(self.fields)
+
+    fields['people'] = ', '.join(fields.get('people', []))
+
+    evt = Joint_Event(**fields)
+    program._add_joint_event(evt)
+    return evt
+
+
+################################################################################
+## conf program builder
 
 class Program:
   def __init__(self, other: Optional['Program'] = None):
@@ -142,10 +314,14 @@ class Program:
         return {try_copy(kv[0]): try_copy(kv[1]) for kv in val.items()}
       if type(val) is set:
         return {try_copy(e) for e in val}
-      elif hasattr(val, 'copy'):
-        return val.copy()
-      else:
+      if type(val) is str:
         return val
+      if isinstance(val, Struct):
+        return val
+      if hasattr(val, 'copy'):
+        return val.copy()
+
+      raise TypeError(f"unsupported type {type(val).__name__}")
 
     def init(slot, ty):
       if other is None:
@@ -179,50 +355,38 @@ class Program:
 
   def add_track(self, conf: Conference):
     tracks = self._conf_2_tracks.setdefault(conf, [])
-    track  = Track(f'{conf.name} {len(tracks) + 1}')
+    track  = Track(id = f'{conf.name} {len(tracks) + 1}')
 
     self._tracks[track.id] = track
     tracks.append(track)
 
     return track
 
-  def add_session(self, *, track, title = None, link = None, start, end = None, chair = None, events: List[Event] = ()):
-    session = Session(title=title, track=track, link=link, start=start, end=end, chair=chair)
+  def _add_session(self, session):
+    assert type(session) is Session
 
     assert session not in self._sessions, f'session {session!r} created twice'
     self._sessions.append(session)
 
-    self._track_2_sessions.setdefault(track, []).append(session)
-
-    for event in events:
-      self._add_event_to_session(event, session)
+    self._track_2_sessions.setdefault(session.track, []).append(session)
 
     return session
 
-  def add_event(self, title, link = None, start = None, end = None, people: List[str] = ()):
-    people = self._format_people(people)
-
-    event = Event(title, link, start, end, people)
+  def _add_event(self, event):
+    assert type(event) is Event, event
 
     assert event not in self._events, f'event {event!r} created twice'
     self._events.append(event)
 
-    return event
+    self._session_2_events.setdefault(event.session, []).append(event)
 
-  def add_joint_event(self, *, title = '', link = '', start, end = None, people = ()):
-    people = self._format_people(people)
-    event  = Joint_Event(title, link, start, end, people)
+  def _add_joint_event(self, event):
+    assert type(event) is Joint_Event, event
 
-    assert event not in self._joint_events, f'joint event {title!r} created twice'
+    assert event not in self._joint_events, f'joint event {event!r} created twice'
 
     self._joint_events.append(event)
     return event
-
-  def _format_people(self, people):
-    if type(people) is str:
-      return people
-    else:
-      return ', '.join(people)
 
   ## slicing
 
@@ -374,12 +538,3 @@ class Program:
   def session_events(self, session):
     return self._session_2_events.get(session, ())
 
-  ## private parts
-
-  def _add_event_to_session(self, event, session):
-    assert type(event) is Event
-    assert type(session) is Session
-    assert (event.start is None) or (event.start >= session.start)
-    assert (event.end   is None) or (event.end   <= session.end)
-
-    self._session_2_events.setdefault(session, []).append(event)

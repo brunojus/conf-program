@@ -24,8 +24,6 @@ def print_HTML_table(program: Program, dst: typing.IO[str] = sys.stdout, *,
       :full_page     whether to generate a standalone page or just a embeddable <div>
   """
 
-  days = slice_per_day(program)
-
   h = HTML_Writer(dst)
 
   if full_page:
@@ -183,10 +181,11 @@ def print_HTML_table(program: Program, dst: typing.IO[str] = sys.stdout, *,
       h.html(f'<td class="{conf.name} border-right" colspan="{num_cols - 1}"></td>')
       yield
 
-  for day in days:
-    assert day.sessions or day.joint_events
+  for day in slice_per_day(program):
+    assert len(list(day.conferences)), [s.title for s in day.joint_events]
+    assert len(list(day.sessions)) or len(list(day.joint_events))
 
-    num_cols, cols_per_conf = columns_per_conference(day)
+    num_cols, cols_per_conf = compute_table_columns(day)
 
     h.open('h3')
     date = next(iter(day.sessions)).day
@@ -253,7 +252,7 @@ def print_HTML_table(program: Program, dst: typing.IO[str] = sys.stdout, *,
             next(r)
           h.close('tr')
 
-      if joint:
+      if joint and joint.title:
         h.open('tr', 'class="border-left border-top border-right border-bottom"', comment='joint')
         h.open('td', 'class="time"')
         if joint.title:
@@ -372,6 +371,9 @@ class HTML_Writer:
 def slice_per_day(program: Program) -> typing.List[Program]:
   """slice program into per day subprograms."""
 
+  assert len(list(program.conferences)), 'program has no conferences'
+  assert len(list(program.sessions) + list(program.joint_events)), 'program has no events'
+
   days: Set[datetime.date] = set()
 
   ## get list of days of conference
@@ -386,6 +388,10 @@ def slice_per_day(program: Program) -> typing.List[Program]:
 
   for day in days:
     slice = program.slice(lambda s: s.day == day)
+
+    assert len(list(slice.conferences)), f'day {day}, {[s.title for c in program.sessions]}'
+    assert len(list(slice.sessions) + list(slice.joint_events)), 'program has no events'
+
     slices.append(slice)
 
   return slices
@@ -443,7 +449,7 @@ class HTML_Text(HTML_AST):
     dst.text(self.txt, nl_to_br = self.nl_to_br)
 
 
-def columns_per_conference(program) -> typing.Tuple[int, typing.Dict[Conference, int]]:
+def compute_table_columns(program) -> typing.Tuple[int, typing.Dict[Conference, int]]:
   """
     calculate how many columns each conference should get in the big program table.
     Each track needs at least two columns (first column is time, rest is program)
@@ -453,6 +459,9 @@ def columns_per_conference(program) -> typing.Tuple[int, typing.Dict[Conference,
       total num columns
       num columns per conference
   """
+
+  assert len(list(program.conferences)), 'program has no conferences'
+  assert len(list(program.sessions) + list(program.joint_events)), 'program has no events'
 
   def safe_div(a, b):
     assert int(a / b) == a // b, f'bad div {a!r} / {b!r}'

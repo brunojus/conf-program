@@ -10,23 +10,23 @@ from typing import *
 ################################################################################
 ##### COMPLETE PROGRAM
 
-program = Program()
+PROGRAM = Program()
 
-HPCA  = program.add_conference('HPCA')
-CGO   = program.add_conference('CGO')
-PPoPP = program.add_conference('PPoPP')
-CC    = program.add_conference('CC')
+HPCA  = PROGRAM.add_conference('HPCA')
+CGO   = PROGRAM.add_conference('CGO')
+PPoPP = PROGRAM.add_conference('PPoPP')
+CC    = PROGRAM.add_conference('CC')
 
 
-HPCA_track_1  = program.add_track(HPCA)
-HPCA_track_2  = program.add_track(HPCA)
-HPCA_track_3  = program.add_track(HPCA)
-CGO_track_1   = program.add_track(CGO)
-CGO_track_2   = program.add_track(CGO)
-PPoPP_track_1 = program.add_track(PPoPP)
-PPoPP_track_2 = program.add_track(PPoPP)
-PPoPP_track_3 = program.add_track(PPoPP)
-CC_track_1    = program.add_track(CC)
+HPCA_track_1  = PROGRAM.add_track(HPCA)
+HPCA_track_2  = PROGRAM.add_track(HPCA)
+HPCA_track_3  = PROGRAM.add_track(HPCA)
+CGO_track_1   = PROGRAM.add_track(CGO)
+CGO_track_2   = PROGRAM.add_track(CGO)
+PPoPP_track_1 = PROGRAM.add_track(PPoPP)
+PPoPP_track_2 = PROGRAM.add_track(PPoPP)
+PPoPP_track_3 = PROGRAM.add_track(PPoPP)
+CC_track_1    = PROGRAM.add_track(CC)
 
 SATURDAY  = datetime.date(2018, 2, 24)
 SUNDAY    = datetime.date(2018, 2, 25)
@@ -35,22 +35,33 @@ TUESDAY   = datetime.date(2018, 2, 27)
 WEDNESDAY = datetime.date(2018, 2, 28)
 
 
-def on_day(day: datetime.date, hour, minute):
-  return datetime.datetime(day.year, day.month, day.day, hour, minute)
+def day_time(day: datetime.date):
+  def time(hour, minute):
+    return datetime.datetime(day.year, day.month, day.day, hour, minute)
+
+  return time
 
 
-session     = program.add_session
-event       = program.add_event
-joint_event = program.add_joint_event
+def session(*, track: Track, **kwargs) -> Session:
+  builder = Session_Builder(**kwargs)
+
+  return builder.build(PROGRAM, track)
+
+
+def joint_event(**kwargs) -> Joint_Event:
+  builder = Joint_Event_Builder(**kwargs)
+
+  return builder.build(PROGRAM)
+
+
+event = Event_Builder
 
 
 #####
 ##### SATURDAY
 #####
 
-def time(hour, minute):
-  return on_day(SATURDAY, hour, minute)
-
+time = day_time(SATURDAY)
 
 joint_event(
   title = 'Registration',
@@ -278,7 +289,7 @@ session(
   end    = time(15, 00),
   events = [
     event(
-      title  = "LLVM Session 1",
+      title  = "Session 1",
     ),
   ],
 )
@@ -289,9 +300,7 @@ session(
   start  = time(15, 30),
   end    = time(17, 00),
   events = [
-    event(
-      title  = "LLVM Session 2",
-    ),
+    event(title = "Session 2"),
   ],
 )
 
@@ -303,7 +312,7 @@ session(
   end    = time(10, 00),
   events = [
     event(
-      title  = "RWDSL'18 Session 1",
+      title  = "Session 1",
     ),
   ],
 )
@@ -315,7 +324,7 @@ session(
   end    = time(12, 00),
   events = [
     event(
-      title  = "RWDSL'18 Session 2",
+      title  = "Session 2",
     ),
   ],
 )
@@ -327,7 +336,7 @@ session(
   end    = time(15, 00),
   events = [
     event(
-      title  = "RWDSL'18 Session 3",
+      title  = "Session 3",
     ),
   ],
 )
@@ -339,7 +348,7 @@ session(
   end    = time(17, 00),
   events = [
     event(
-      title  = "RWDSL'18 Session 4",
+      title  = "Session 4",
     ),
   ],
 )
@@ -427,8 +436,7 @@ session(
   start  = time(8, 30),
   end    = time(10, 00),
   events = [
-    event(
-      title   = "CC Session 1",
+    event(title = "Session 1",
     ),
   ],
 )
@@ -440,7 +448,7 @@ session(
   end    = time(12, 00),
   events = [
     event(
-      title   = "CC Session 2",
+      title   = "Session 2",
     ),
   ],
 )
@@ -452,7 +460,7 @@ session(
   end    = time(15, 00),
   events = [
     event(
-      title   = "CC Session 3",
+      title   = "Session 3",
     ),
   ],
 )
@@ -464,7 +472,7 @@ session(
   end    = time(17, 00),
   events = [
     event(
-      title   = "CC Session 4",
+      title   = "Session 4",
     ),
   ],
 )
@@ -474,8 +482,7 @@ session(
 ##### SUNDAY
 #####
 
-def time(hour, minute):
-  return on_day(SUNDAY, hour, minute)
+time = day_time(SUNDAY)
 
 
 joint_event(
@@ -506,9 +513,7 @@ session(
   start  = time(8, 30),
   end    = time(10, 00),
   events = [
-    event(
-      title  = "WP3 Session 1",
-    ),
+    event(title = "Session 1"),
   ],
 )
 session(
@@ -518,9 +523,7 @@ session(
   start  = time(10, 30),
   end    = time(12, 00),
   events = [
-    event(
-      title  = "WP3 Session 2",
-    ),
+    event(title = "Session 2"),
   ],
 )
 session(
@@ -530,9 +533,7 @@ session(
   start  = time(13, 30),
   end    = time(15, 00),
   events = [
-    event(
-      title  = "WP3 Session 3",
-    ),
+    event(title = "Session 3"),
   ],
 )
 session(
@@ -542,9 +543,7 @@ session(
   start  = time(15, 30),
   end    = time(17, 00),
   events = [
-    event(
-      title  = "WP3 Session 4",
-    ),
+    event(title = "Session 4"),
   ],
 )
 
@@ -556,7 +555,7 @@ session(
   end    = time(10, 00),
   events = [
     event(
-      title  = "Big Data Session 1",
+      title  = "Session 1",
     ),
   ],
 )
@@ -568,7 +567,7 @@ session(
   end    = time(12, 00),
   events = [
     event(
-      title  = "Big Data Session 2",
+      title  = "Session 2",
     ),
   ],
 )
@@ -699,7 +698,7 @@ session(
   start  = time(8, 30),
   end    = time(10, 00),
   events = [
-    event(title = "PMAM Session 1",),
+    event(title = "Session 1",),
   ],
 )
 session(
@@ -709,7 +708,7 @@ session(
   start  = time(10, 30),
   end    = time(12, 00),
   events = [
-    event(title = "PMAM Session 2",),
+    event(title = "Session 2",),
   ],
 )
 session(
@@ -719,7 +718,7 @@ session(
   start  = time(13, 30),
   end    = time(15, 00),
   events = [
-    event(title = "PMAM Session 3",),
+    event(title = "Session 3",),
   ],
 )
 session(
@@ -729,7 +728,7 @@ session(
   start  = time(15, 30),
   end    = time(17, 00),
   events = [
-    event(title = "PMAM Session 4",),
+    event(title = "Session 4",),
   ],
 )
 
@@ -740,7 +739,7 @@ session(
     start  = time(8, 30),
   end    = time(10, 00),
   events = [
-    event(title = "GPGPU Session 1",),
+    event(title = "Session 1",),
   ],
 )
 session(
@@ -750,7 +749,7 @@ session(
   start  = time(10, 30),
   end    = time(12, 00),
   events = [
-    event(title = "GPGPU Session 2",),
+    event(title = "Session 2",),
   ],
 )
 session(
@@ -760,7 +759,7 @@ session(
   start  = time(13, 30),
   end    = time(15, 00),
   events = [
-    event(title = "GPGPU Session 3",),
+    event(title = "Session 3",),
   ],
 )
 session(
@@ -770,7 +769,7 @@ session(
   start  = time(15, 30),
   end    = time(17, 00),
   events = [
-    event(title = "GPGPU Session 4",),
+    event(title = "Session 4",),
   ],
 )
 
@@ -782,17 +781,17 @@ session(
   end    = time(10, 00),
   events = [
     event(
-      title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming 1",
+      title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming",
       link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-an-introduction-to-intel-threading-building-blocks-intel-tbb-and-its-support-for-heterogeneous-programming',
       people = ['Rafael Asenjo, Jim Cownie, Alexei Katranov, Aleksei Fedotov'],
     ),
     event(
-      title  = "Debugging and Profiling Task Parallel Programs with TASKPROF 1",
+      title  = "Debugging and Profiling Task Parallel Programs with TASKPROF",
       link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-debugging-and-profiling-task-parallel-programs-with-taskprof',
       people = ['Santosh Nagarakatte, Adarsh Yoga'],
     ),
     event(
-      title  = "Productive parallel programming on FPGA with high-level synthesis 1",
+      title  = "Productive parallel programming on FPGA with high-level synthesis",
       link   = 'https://spcl.inf.ethz.ch/Teaching/2018-ppopp/',
       people = ['Johannes de Fine Licht, Torsten Hoefler'],
     ),
@@ -806,17 +805,17 @@ session(
   end    = time(12, 00),
   events = [
     event(
-      title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming 2",
+      title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming",
       link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-an-introduction-to-intel-threading-building-blocks-intel-tbb-and-its-support-for-heterogeneous-programming',
       people = ['Rafael Asenjo, Jim Cownie, Alexei Katranov, Aleksei Fedotov'],
     ),
     event(
-      title  = "Debugging and Profiling Task Parallel Programs with TASKPROF 2",
+      title  = "Debugging and Profiling Task Parallel Programs with TASKPROF",
       link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-debugging-and-profiling-task-parallel-programs-with-taskprof',
       people = ['Santosh Nagarakatte, Adarsh Yoga'],
     ),
     event(
-      title  = "Productive parallel programming on FPGA with high-level synthesis 2",
+      title  = "Productive parallel programming on FPGA with high-level synthesis",
       link   = 'https://spcl.inf.ethz.ch/Teaching/2018-ppopp/',
       people = ['Johannes de Fine Licht, Torsten Hoefler'],
     ),
@@ -830,12 +829,12 @@ session(
   end    = time(15, 00),
   events = [
     event(
-      title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming 3",
+      title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming",
       link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-an-introduction-to-intel-threading-building-blocks-intel-tbb-and-its-support-for-heterogeneous-programming',
       people = ['Rafael Asenjo, Jim Cownie, Alexei Katranov, Aleksei Fedotov'],
     ),
     event(
-      title  = "High Performance Distributed Deep Learning: A Beginner's Guide 1",
+      title  = "High Performance Distributed Deep Learning: A Beginner's Guide",
       link   = 'http://web.cse.ohio-state.edu/~panda.2/ppopp18_dl_tut.html',
       people = ['Dhabaleswar K. Panda, Ammar Ahmad Awan, Subramoni Hari'],
     ),
@@ -849,12 +848,12 @@ session(
   end    = time(17, 00),
   events = [
     event(
-      title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming 4",
+      title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming",
       link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-an-introduction-to-intel-threading-building-blocks-intel-tbb-and-its-support-for-heterogeneous-programming',
       people = ['Rafael Asenjo, Jim Cownie, Alexei Katranov, Aleksei Fedotov'],
     ),
     event(
-      title  = "High Performance Distributed Deep Learning: A Beginner's Guide 2",
+      title  = "High Performance Distributed Deep Learning: A Beginner's Guide",
       link   = 'http://web.cse.ohio-state.edu/~panda.2/ppopp18_dl_tut.html',
       people = ['Dhabaleswar K. Panda, Ammar Ahmad Awan, Subramoni Hari'],
     ),
@@ -869,9 +868,7 @@ session(
   start  = time(8, 30),
   end    = time(10, 00),
   events = [
-    event(
-      title   = "CC Session 5",
-    ),
+    event(title = "Session 5"),
   ],
 )
 session(
@@ -881,9 +878,7 @@ session(
   start  = time(10, 30),
   end    = time(12, 00),
   events = [
-    event(
-      title   = "CC Session 6",
-    ),
+    event(title = "Session 6"),
   ],
 )
 session(
@@ -893,9 +888,7 @@ session(
   start  = time(13, 30),
   end    = time(15, 00),
   events = [
-    event(
-      title   = "CC Session 7",
-    ),
+    event(title = "Session 7"),
   ],
 )
 session(
@@ -905,9 +898,7 @@ session(
   start  = time(15, 30),
   end    = time(17, 00),
   events = [
-    event(
-      title   = "CC Session 8",
-    ),
+    event(title = "Session 8"),
   ],
 )
 
@@ -916,9 +907,7 @@ session(
 ##### MONDAY
 #####
 
-def time(hour, minute):
-  return on_day(MONDAY, hour, minute)
-
+time = day_time(MONDAY)
 
 joint_event(
   title = 'Registration',
@@ -1360,16 +1349,26 @@ session(
 )
 
 session(
+  track  = CGO_track_1,
+  title  = 'Artifact Evaluation',
+  start  = time(17, 15),
+  end    = time(17, 45),
+  events = [
+    event(title = 'CGO Artifact Evaluation')
+  ],
+)
+
+
+session(
   track  = PPoPP_track_1,
   title  = 'Artifact Evaluation',
   start  = time(17, 15),
   end    = time(17, 45),
   events = [
-    event(
-      title = 'PPoPP Artifact Evaluation',
-    )
+    event(title = 'PPoPP Artifact Evaluation')
   ],
 )
+
 
 # fake joint event to seperate sessions & business meetings
 joint_event(start = time(18, 00),)
@@ -1387,14 +1386,14 @@ session(
   track  = CGO_track_1,
   start  = time(18, 00),
   end    = time(19, 00),
-  events = [event("CGO Business Meeting")]
+  events = [event(title="CGO Business Meeting")]
 )
 
 session(
   track  = PPoPP_track_1,
   start  = time(18, 00),
   end    = time(19, 00),
-  events = [event("PPoPP Business Meeting")]
+  events = [event(title="PPoPP Business Meeting")]
 )
 
 
@@ -1402,9 +1401,7 @@ session(
 ##### TUESDAY
 #####
 
-def time(hour, minute):
-  return on_day(TUESDAY, hour, minute)
-
+time = day_time(TUESDAY)
 
 joint_event(
   title = 'Registration',
@@ -1828,9 +1825,7 @@ session(
 ##### WEDNESDAY
 #####
 
-def time(hour, minute):
-  return on_day(WEDNESDAY, hour, minute)
-
+time = day_time(WEDNESDAY)
 
 joint_event(
   title  = "PPoPP Keynote: From confusion to clarity: hardware concurrency programming models 2008-2018",
@@ -2124,7 +2119,7 @@ if __name__ == '__main__':
   args = parser.parse_args()
 
   print_HTML_table(
-    program,
+    PROGRAM,
     dst         = args.output,
     show_people = args.show_people,
     font_size   = args.font_size,
