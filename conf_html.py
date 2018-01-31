@@ -240,7 +240,7 @@ class HTML:
 
         if session.room:
           h.html('&nbsp;')
-          h.text('(' + session.room + ')')
+          h.html('(' + '&nbsp;'.join(session.room.split()) + ')')
 
         h.close('td')
         yield True
