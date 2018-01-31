@@ -1412,9 +1412,18 @@ joint_event(
   start = time(9, 40), end = time(10, 5),
 )
 joint_event(
-  title = 'Lunch Session and Panel: Women in Academia and Industry',
-  link  = 'http://cgo.org/cgo2018/panel/',
+  title = 'Lunch',
   start = time(11, 45), end = time(13, 15),
+)
+joint_event(
+  title = 'Women in Academia and Industry (lunch session in lunch room)',
+  link  = 'http://cgo.org/cgo2018/panel/',
+  start = time(11, 45), end = time(12, 30),
+)
+joint_event(
+  title = 'Women in Academia and Industry (panel in same room as following keynote)',
+  link  = 'http://cgo.org/cgo2018/panel/',
+  start = time(12, 35), end = time(13, 10),
 )
 joint_event(
   title  = "CGO Keynote: Biological Computation",

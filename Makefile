@@ -14,3 +14,5 @@ program.html: $(INPUTS)
 program-embed.html: $(INPUTS)
 	python3 make_joint_program.py --hide-people --font-size=9 --embeddable -o program-embed.html
 
+sync: $(OUTPUTS) joint-program.pdf
+	rsync $(OUTPUTS) joint-program.pdf fgruber@mips.complang.tuwien.ac.at:/usr/ftp/pub/hpca-cgo-ppopp-cc
