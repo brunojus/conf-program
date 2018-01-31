@@ -67,7 +67,7 @@ time = day_time(SATURDAY)
 
 joint_event(
   title = 'Registration',
-  start = time(8, 0), end = time(18, 30),
+  start = time(8, 0), end = time(18, 15),
 )
 joint_event(
   title = 'Coffee Break',
@@ -937,6 +937,35 @@ session(
 )
 
 session(
+  track  = PPoPP_track_3,
+  title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming",
+  link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-an-introduction-to-intel-threading-building-blocks-intel-tbb-and-its-support-for-heterogeneous-programming',
+  start  = time(15, 30),
+  end    = time(17, 00),
+  room   = 'Pacific 1',
+  events = [
+    event(
+      title  = "Session 4",
+      people = ['Rafael Asenjo, Jim Cownie, Aleksei Fedotov'],
+    ),
+  ],
+)
+session(
+  track  = PPoPP_track_4,
+  title  = "High Performance Distributed Deep Learning: A Beginner's Guide",
+  link   = 'http://web.cse.ohio-state.edu/~panda.2/ppopp18_dl_tut.html',
+  start  = time(15, 30),
+  end    = time(17, 00),
+  room   = 'Europa 6',
+  events = [
+    event(
+      title  = "Session 2",
+      people = ['Dhabaleswar K. Panda, Ammar Ahmad Awan, Subramoni Hari'],
+    ),
+  ],
+)
+
+session(
   track  = CC_track_1,
   title  = "CC: International Conference on Compiler Construction Compiler Construction",
   link   = "https://cc-conference.github.io/18/",
@@ -990,7 +1019,7 @@ time = day_time(MONDAY)
 
 joint_event(
   title = 'Registration',
-  start = time(8, 0), end = time(18, 30),
+  start = time(8, 0), end = time(18, 00),
 )
 joint_event(
   title = 'Opening',
@@ -1500,7 +1529,7 @@ time = day_time(TUESDAY)
 
 joint_event(
   title = 'Registration',
-  start = time(8, 0), end = time(18, 30),
+  start = time(8, 0), end = time(17, 0),
 )
 joint_event(
   title = 'Coffee Break',
