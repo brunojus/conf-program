@@ -167,6 +167,7 @@ class Session(Struct):
     ('end',   Optional[datetime.datetime], None),
     ('title', Optional[str], None),
     ('link',  Optional[str], None),
+    ('room',  Optional[str], None),
     ('chair', Optional[str], None),
   )
 
@@ -208,6 +209,7 @@ class Joint_Event(Struct):
     ('end',    Optional[datetime.datetime], None),
     ('link',   Optional[str], None),
     ('people', Optional[str], None),
+    ('room',   Optional[str], None),
   )
 
   def _post_init(self):

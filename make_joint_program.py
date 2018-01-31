@@ -26,6 +26,8 @@ CGO_track_2   = PROGRAM.add_track(CGO)
 PPoPP_track_1 = PROGRAM.add_track(PPoPP)
 PPoPP_track_2 = PROGRAM.add_track(PPoPP)
 PPoPP_track_3 = PROGRAM.add_track(PPoPP)
+PPoPP_track_4 = PROGRAM.add_track(PPoPP)
+PPoPP_track_5 = PROGRAM.add_track(PPoPP)
 CC_track_1    = PROGRAM.add_track(CC)
 
 SATURDAY  = datetime.date(2018, 2, 24)
@@ -95,13 +97,14 @@ session(
   link   = "https://aacbb-workshop.github.io/",
   start  = time(8, 30),
   end    = time(10, 00),
+  room   = 'Europa 3',
   events = [
     event(
       title  = "Opening Remarks",
       # people = ["", ]
     ),
     event(
-      title  = 'Keynote 1: "Accelerating Genome Analysis: A Primer on an Ongoing Journey',
+      title  = 'Keynote 1: "Accelerating Genome Analysis: A Primer on an Ongoing Journey"',
       people = ["Onur Mutlu (ETH, CMU)", ]
     ),
     event(
@@ -120,6 +123,7 @@ session(
   link   = "https://aacbb-workshop.github.io/",
   start  = time(10, 30),
   end    = time(12, 10),
+  room   = 'Europa 3',
   events = [
     event(
       title  = 'Invited Talk: "Next Generation Sequencing: Big Data meets High Performance Computing Architectures"',
@@ -145,6 +149,7 @@ session(
   link   = "https://aacbb-workshop.github.io/",
   start  = time(13, 30),
   end    = time(15, 10),
+  room   = 'Europa 3',
   events = [
     event(
       title  = 'Keynote 2: "Automata Processor and its Applications in Bioinformatics"',
@@ -170,6 +175,7 @@ session(
   link   = "https://aacbb-workshop.github.io/",
   start  = time(15, 30),
   end    = time(17, 50),
+  room   = 'Europa 3',
   events = [
     event(
       title  = 'Invited Talk: "Addressing Computational Burden to Realize Precision Medicine"',
@@ -205,10 +211,11 @@ session(
 
 session(
   track  = HPCA_track_2,
-  title  = "HIPINEB: High-Performance Interconnection Networks in the Exascale and Big-Data Era (Part1)",
+  title  = "HIPINEB: High-Performance Interconnection Networks in the Exascale and Big-Data Era",
   link   = "http://hipineb.i3a.info/hipineb2018/",
   start  = time(8, 30),
   end    = time(10, 00),
+  room   = 'Europa 7',
   events = [
     event(
       title  = "Opening",
@@ -221,10 +228,11 @@ session(
 )
 session(
   track  = HPCA_track_2,
-  title  = "HIPINEB: High-Performance Interconnection Networks in the Exascale and Big-Data Era (Part1)",
+  title  = "HIPINEB: High-Performance Interconnection Networks in the Exascale and Big-Data Era",
   link   = "http://hipineb.i3a.info/hipineb2018/",
   start  = time(10, 30),
   end    = time(12, 00),
+  room   = 'Europa 7',
   events = [
     event(
       title  = 'Technical Session 1 (research papers)',
@@ -233,10 +241,11 @@ session(
 )
 session(
   track  = HPCA_track_2,
-  title  = "HIPINEB: High-Performance Interconnection Networks in the Exascale and Big-Data Era (Part1)",
+  title  = "HIPINEB: High-Performance Interconnection Networks in the Exascale and Big-Data Era",
   link   = "http://hipineb.i3a.info/hipineb2018/",
   start  = time(13, 30),
   end    = time(15, 00),
+  room   = 'Europa 7',
   events = [
     event(
       title  = 'Technical Session 2 (research papers)',
@@ -245,10 +254,11 @@ session(
 )
 session(
   track  = HPCA_track_2,
-  title  = "HIPINEB: High-Performance Interconnection Networks in the Exascale and Big-Data Era (Part1)",
+  title  = "HIPINEB: High-Performance Interconnection Networks in the Exascale and Big-Data Era",
   link   = "http://hipineb.i3a.info/hipineb2018/",
   start  = time(15, 30),
   end    = time(17, 00),
+  room   = 'Europa 7',
   events = [
     event(
       title  = 'Panel Session: "Industrial perspective of high-speed communication technology evolution"',
@@ -263,6 +273,7 @@ session(
   link   = "http://llvm.org/devmtg/2018-02-24/",
   start  = time(8, 30),
   end    = time(10, 00),
+  room   = 'Europa 2',
   events = [
     event(
       title  = "Tutorial 1",
@@ -275,6 +286,7 @@ session(
   link   = "http://llvm.org/devmtg/2018-02-24/",
   start  = time(10, 30),
   end    = time(12, 00),
+  room   = 'Europa 2',
   events = [
     event(
       title  = "Tutorial 2",
@@ -287,6 +299,7 @@ session(
   link   = "https://sites.google.com/site/realworlddsl/",
   start  = time(13, 30),
   end    = time(15, 00),
+  room   = 'Europa 2',
   events = [
     event(
       title  = "Session 1",
@@ -299,6 +312,7 @@ session(
   link   = "https://sites.google.com/site/realworlddsl/",
   start  = time(15, 30),
   end    = time(17, 00),
+  room   = 'Europa 2',
   events = [
     event(title = "Session 2"),
   ],
@@ -310,6 +324,7 @@ session(
   link   = "https://sites.google.com/site/realworlddsl/",
   start  = time(8, 30),
   end    = time(10, 00),
+  room   = 'Europa 6',
   events = [
     event(
       title  = "Session 1",
@@ -322,6 +337,7 @@ session(
   link   = "https://sites.google.com/site/realworlddsl/",
   start  = time(10, 30),
   end    = time(12, 00),
+  room   = 'Europa 6',
   events = [
     event(
       title  = "Session 2",
@@ -334,6 +350,7 @@ session(
   link   = "https://sites.google.com/site/realworlddsl/",
   start  = time(13, 30),
   end    = time(15, 00),
+  room   = 'Europa 6',
   events = [
     event(
       title  = "Session 3",
@@ -346,6 +363,7 @@ session(
   link   = "https://sites.google.com/site/realworlddsl/",
   start  = time(15, 30),
   end    = time(17, 00),
+  room   = 'Europa 6',
   events = [
     event(
       title  = "Session 4",
@@ -359,6 +377,7 @@ session(
   link   = "https://ppopp18.sigplan.org/track/WPMVP2018",
   start  = time(8, 30),
   end    = time(10, 00),
+  room   = 'Europa 5',
   events = [
     event(
       title  = "Keynote TBA",
@@ -375,6 +394,7 @@ session(
   link   = "https://ppopp18.sigplan.org/track/WPMVP2018",
   start  = time(10, 30),
   end    = time(12, 00),
+  room   = 'Europa 5',
   events = [
     event(
       title  = "Small SIMD Matrices for CERN High Throughput Computing",
@@ -396,6 +416,7 @@ session(
   link   = "https://ppopp18.sigplan.org/track/WPMVP2018",
   start  = time(13, 30),
   end    = time(15, 00),
+  room   = 'Europa 5',
   events = [
     event(
       title  = "Ikra-Cpp: A C++/CUDA DSL for Object-Oriented Programming with Structure-of-Arrays Layout",
@@ -417,6 +438,7 @@ session(
   link   = "https://ppopp18.sigplan.org/track/WPMVP2018",
   start  = time(15, 30),
   end    = time(17, 00),
+  room   = 'Europa 5',
   events = [
     event(
       title  = "Investigating automatic vectorization for real-time 3D scene understanding",
@@ -435,6 +457,7 @@ session(
   link   = "https://cc-conference.github.io/18/",
   start  = time(8, 30),
   end    = time(10, 00),
+  room   = 'Europa 1',
   events = [
     event(title = "Session 1",
     ),
@@ -446,6 +469,7 @@ session(
   link   = "https://cc-conference.github.io/18/",
   start  = time(10, 30),
   end    = time(12, 00),
+  room   = 'Europa 1',
   events = [
     event(
       title   = "Session 2",
@@ -458,6 +482,7 @@ session(
   link   = "https://cc-conference.github.io/18/",
   start  = time(13, 30),
   end    = time(15, 00),
+  room   = 'Europa 1',
   events = [
     event(
       title   = "Session 3",
@@ -470,6 +495,7 @@ session(
   link   = "https://cc-conference.github.io/18/",
   start  = time(15, 30),
   end    = time(17, 00),
+  room   = 'Europa 1',
   events = [
     event(
       title   = "Session 4",
@@ -512,6 +538,7 @@ session(
   link   = 'http://wp3workshop.website/',
   start  = time(8, 30),
   end    = time(10, 00),
+  room   = 'Europa 5',
   events = [
     event(title = "Session 1"),
   ],
@@ -522,6 +549,7 @@ session(
   link   = 'http://wp3workshop.website/',
   start  = time(10, 30),
   end    = time(12, 00),
+  room   = 'Europa 5',
   events = [
     event(title = "Session 2"),
   ],
@@ -532,6 +560,7 @@ session(
   link   = 'http://wp3workshop.website/',
   start  = time(13, 30),
   end    = time(15, 00),
+  room   = 'Europa 5',
   events = [
     event(title = "Session 3"),
   ],
@@ -542,6 +571,7 @@ session(
   link   = 'http://wp3workshop.website/',
   start  = time(15, 30),
   end    = time(17, 00),
+  room   = 'Europa 5',
   events = [
     event(title = "Session 4"),
   ],
@@ -553,6 +583,7 @@ session(
   link   = "http://web.cse.ohio-state.edu/~panda.2/hpca18_bigdata_tut.html",
   start  = time(8, 30),
   end    = time(10, 00),
+  room   = 'Europa 7',
   events = [
     event(
       title  = "Session 1",
@@ -565,6 +596,7 @@ session(
   link   = "http://web.cse.ohio-state.edu/~panda.2/hpca18_bigdata_tut.html",
   start  = time(10, 30),
   end    = time(12, 00),
+  room   = 'Europa 7',
   events = [
     event(
       title  = "Session 2",
@@ -578,6 +610,7 @@ session(
   link   = "http://www.pulp-platform.org/hpca2018/",
   start  = time(13, 30),
   end    = time(15, 00),
+  room   = 'Europa 7',
   events = [
     event(
       title  = "PULP concept and goals",
@@ -603,6 +636,7 @@ session(
   link   = "http://www.pulp-platform.org/hpca2018/",
   start  = time(15, 30),
   end    = time(17, 30),
+  room   = 'Europa 7',
   events = [
     event(
       title  = "Advanced PULP silicon implementations",
@@ -625,6 +659,7 @@ session(
   link   = 'https://sites.google.com/site/rcudatutorial/home/hpca2018',
   start  = time(13, 30),
   end    = time(15, 00),
+  room   = 'Pacific 2',
   events = [
     event(
       title  = "[Session 1.1] Presentation of remote GPU virtualization techniques and rCUDA features (50 minutes)",
@@ -640,6 +675,7 @@ session(
   link   = 'https://sites.google.com/site/rcudatutorial/home/hpca2018',
   start  = time(15, 30),
   end    = time(17, 0),
+  room   = 'Pacific 2',
   events = [
     event(
       title = "[Session 2] Guided exercises so that the audience uses rCUDA in a cluster located at Technical University of Valencia, Spain",
@@ -656,6 +692,7 @@ session(
   link   = 'http://mrg.doc.ic.ac.uk/tutorials/cgo2018/',
   start  = time(8, 30),
   end    = time(10, 00),
+  room   = 'Pacific 3',
   events = [
     event(title = "Session 1",),
   ],
@@ -666,6 +703,7 @@ session(
   link   = 'http://mrg.doc.ic.ac.uk/tutorials/cgo2018/',
   start  = time(10, 30),
   end    = time(12, 00),
+  room   = 'Pacific 3',
   events = [
     event(title = "Session 2",),
   ],
@@ -676,6 +714,7 @@ session(
   link   = 'http://mrg.doc.ic.ac.uk/tutorials/cgo2018/',
   start  = time(13, 30),
   end    = time(15, 00),
+  room   = 'Pacific 3',
   events = [
     event(title = "Session 3",),
   ],
@@ -686,6 +725,7 @@ session(
   link   = 'http://mrg.doc.ic.ac.uk/tutorials/cgo2018/',
   start  = time(15, 30),
   end    = time(17, 00),
+  room   = 'Pacific 3',
   events = [
     event(title = "Session 4",),
   ],
@@ -697,6 +737,7 @@ session(
   link   = "https://ppopp18.sigplan.org/track/pmam-2018",
   start  = time(8, 30),
   end    = time(10, 00),
+  room   = 'Europa 3',
   events = [
     event(title = "Session 1",),
   ],
@@ -707,6 +748,7 @@ session(
   link   = "https://ppopp18.sigplan.org/track/pmam-2018",
   start  = time(10, 30),
   end    = time(12, 00),
+  room   = 'Europa 3',
   events = [
     event(title = "Session 2",),
   ],
@@ -717,6 +759,7 @@ session(
   link   = "https://ppopp18.sigplan.org/track/pmam-2018",
   start  = time(13, 30),
   end    = time(15, 00),
+  room   = 'Europa 3',
   events = [
     event(title = "Session 3",),
   ],
@@ -727,6 +770,7 @@ session(
   link   = "https://ppopp18.sigplan.org/track/pmam-2018",
   start  = time(15, 30),
   end    = time(17, 00),
+  room   = 'Europa 3',
   events = [
     event(title = "Session 4",),
   ],
@@ -736,130 +780,161 @@ session(
   track  = PPoPP_track_2,
   title  = "GPGPU: Workshop on General Purpose Processing Using GPU",
   link   = "https://gpgpu11.000webhostapp.com/",
-    start  = time(8, 30),
-  end    = time(10, 00),
-  events = [
-    event(title = "Session 1",),
-  ],
-)
-session(
-  track  = PPoPP_track_2,
-  title  = "GPGPU: Workshop on General Purpose Processing Using GPU",
-  link   = "https://gpgpu11.000webhostapp.com/",
-  start  = time(10, 30),
-  end    = time(12, 00),
-  events = [
-    event(title = "Session 2",),
-  ],
-)
-session(
-  track  = PPoPP_track_2,
-  title  = "GPGPU: Workshop on General Purpose Processing Using GPU",
-  link   = "https://gpgpu11.000webhostapp.com/",
-  start  = time(13, 30),
-  end    = time(15, 00),
-  events = [
-    event(title = "Session 3",),
-  ],
-)
-session(
-  track  = PPoPP_track_2,
-  title  = "GPGPU: Workshop on General Purpose Processing Using GPU",
-  link   = "https://gpgpu11.000webhostapp.com/",
-  start  = time(15, 30),
-  end    = time(17, 00),
-  events = [
-    event(title = "Session 4",),
-  ],
-)
-
-session(
-  track  = PPoPP_track_3,
-  title  = "PPoPP Tutorials",
-  link   = "https://ppopp18.sigplan.org/track/PPoPP-2018-Tutorials",
   start  = time(8, 30),
   end    = time(10, 00),
+  room   = 'Europa 2',
   events = [
-    event(
-      title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming",
-      link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-an-introduction-to-intel-threading-building-blocks-intel-tbb-and-its-support-for-heterogeneous-programming',
-      people = ['Rafael Asenjo, Jim Cownie, Alexei Katranov, Aleksei Fedotov'],
-    ),
-    event(
-      title  = "Debugging and Profiling Task Parallel Programs with TASKPROF",
-      link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-debugging-and-profiling-task-parallel-programs-with-taskprof',
-      people = ['Santosh Nagarakatte, Adarsh Yoga'],
-    ),
-    event(
-      title  = "Productive parallel programming on FPGA with high-level synthesis",
-      link   = 'https://spcl.inf.ethz.ch/Teaching/2018-ppopp/',
-      people = ['Johannes de Fine Licht, Torsten Hoefler'],
-    ),
+    event(title = "Session 1",),
   ],
 )
 session(
-  track  = PPoPP_track_3,
-  title  = "PPoPP Tutorials",
-  link   = "https://ppopp18.sigplan.org/track/PPoPP-2018-Tutorials",
+  track  = PPoPP_track_2,
+  title  = "GPGPU: Workshop on General Purpose Processing Using GPU",
+  link   = "https://gpgpu11.000webhostapp.com/",
   start  = time(10, 30),
   end    = time(12, 00),
+  room   = 'Europa 2',
+  events = [
+    event(title = "Session 2",),
+  ],
+)
+session(
+  track  = PPoPP_track_2,
+  title  = "GPGPU: Workshop on General Purpose Processing Using GPU",
+  link   = "https://gpgpu11.000webhostapp.com/",
+  start  = time(13, 30),
+  end    = time(15, 00),
+  room   = 'Europa 2',
+  events = [
+    event(title = "Session 3",),
+  ],
+)
+session(
+  track  = PPoPP_track_2,
+  title  = "GPGPU: Workshop on General Purpose Processing Using GPU",
+  link   = "https://gpgpu11.000webhostapp.com/",
+  start  = time(15, 30),
+  end    = time(17, 00),
+  room   = 'Europa 2',
+  events = [
+    event(title = "Session 4",),
+  ],
+)
+
+session(
+  track  = PPoPP_track_3,
+  title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming",
+  link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-an-introduction-to-intel-threading-building-blocks-intel-tbb-and-its-support-for-heterogeneous-programming',
+  start  = time(8, 30),
+  end    = time(10, 00),
+  room   = 'Pacific 1',
   events = [
     event(
-      title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming",
-      link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-an-introduction-to-intel-threading-building-blocks-intel-tbb-and-its-support-for-heterogeneous-programming',
-      people = ['Rafael Asenjo, Jim Cownie, Alexei Katranov, Aleksei Fedotov'],
+      title  = 'Session 1',
+      people = ['Rafael Asenjo, Jim Cownie, Aleksei Fedotov'],
     ),
+  ],
+)
+session(
+  track  = PPoPP_track_4,
+  title  = "Productive parallel programming on FPGA with high-level synthesis",
+  link   = 'https://spcl.inf.ethz.ch/Teaching/2018-ppopp/',
+  start  = time(8, 30),
+  end    = time(10, 00),
+  room   = 'Pacific 2',
+  events = [
     event(
-      title  = "Debugging and Profiling Task Parallel Programs with TASKPROF",
-      link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-debugging-and-profiling-task-parallel-programs-with-taskprof',
-      people = ['Santosh Nagarakatte, Adarsh Yoga'],
-    ),
-    event(
-      title  = "Productive parallel programming on FPGA with high-level synthesis",
-      link   = 'https://spcl.inf.ethz.ch/Teaching/2018-ppopp/',
+      title  = "Session 1",
       people = ['Johannes de Fine Licht, Torsten Hoefler'],
     ),
   ],
 )
 session(
-  track  = PPoPP_track_3,
-  title  = "PPoPP Tutorials",
-  link   = "https://ppopp18.sigplan.org/track/PPoPP-2018-Tutorials",
-  start  = time(13, 30),
-  end    = time(15, 00),
+  track  = PPoPP_track_5,
+  title  = "Debugging and Profiling Task Parallel Programs with TASKPROF",
+  link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-debugging-and-profiling-task-parallel-programs-with-taskprof',
+  start  = time(8, 30),
+  end    = time(10, 00),
+  room   = 'Europa 6',
   events = [
     event(
-      title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming",
-      link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-an-introduction-to-intel-threading-building-blocks-intel-tbb-and-its-support-for-heterogeneous-programming',
-      people = ['Rafael Asenjo, Jim Cownie, Alexei Katranov, Aleksei Fedotov'],
-    ),
-    event(
-      title  = "High Performance Distributed Deep Learning: A Beginner's Guide",
-      link   = 'http://web.cse.ohio-state.edu/~panda.2/ppopp18_dl_tut.html',
-      people = ['Dhabaleswar K. Panda, Ammar Ahmad Awan, Subramoni Hari'],
-    ),
-  ],
-)
-session(
-  track  = PPoPP_track_3,
-  title  = "PPoPP Tutorials",
-  link   = "https://ppopp18.sigplan.org/track/PPoPP-2018-Tutorials",
-  start  = time(15, 30),
-  end    = time(17, 00),
-  events = [
-    event(
-      title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming",
-      link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-an-introduction-to-intel-threading-building-blocks-intel-tbb-and-its-support-for-heterogeneous-programming',
-      people = ['Rafael Asenjo, Jim Cownie, Alexei Katranov, Aleksei Fedotov'],
-    ),
-    event(
-      title  = "High Performance Distributed Deep Learning: A Beginner's Guide",
-      link   = 'http://web.cse.ohio-state.edu/~panda.2/ppopp18_dl_tut.html',
-      people = ['Dhabaleswar K. Panda, Ammar Ahmad Awan, Subramoni Hari'],
+      title  = "Session 1",
+      people = ['Santosh Nagarakatte, Adarsh Yoga'],
     ),
   ],
 )
 
+session(
+  track  = PPoPP_track_3,
+  title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming",
+  link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-an-introduction-to-intel-threading-building-blocks-intel-tbb-and-its-support-for-heterogeneous-programming',
+  start  = time(10, 30),
+  end    = time(12, 00),
+  room   = 'Pacific 1',
+  events = [
+    event(
+      title  = 'Session 2',
+      people = ['Rafael Asenjo, Jim Cownie, Aleksei Fedotov'],
+    ),
+  ],
+)
+session(
+  track  = PPoPP_track_4,
+  title  = "Productive parallel programming on FPGA with high-level synthesis",
+  link   = 'https://spcl.inf.ethz.ch/Teaching/2018-ppopp/',
+  start  = time(10, 30),
+  end    = time(12, 00),
+  room   = 'Pacific 2',
+  events = [
+    event(
+      title  = "Session 2",
+      people = ['Johannes de Fine Licht, Torsten Hoefler'],
+    ),
+  ],
+)
+session(
+  track  = PPoPP_track_5,
+  title  = "Debugging and Profiling Task Parallel Programs with TASKPROF",
+  link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-debugging-and-profiling-task-parallel-programs-with-taskprof',
+  start  = time(10, 30),
+  end    = time(12, 00),
+  room   = 'Europa 6',
+  events = [
+    event(
+      title  = "Session 2",
+      people = ['Santosh Nagarakatte, Adarsh Yoga'],
+    ),
+  ],
+)
+
+session(
+  track  = PPoPP_track_3,
+  title  = "An Introduction to Intel® Threading Building Blocks (Intel® TBB) and its Support for Heterogeneous Programming",
+  link   = 'https://ppopp18.sigplan.org/event/ppopp-2018-tutorials-an-introduction-to-intel-threading-building-blocks-intel-tbb-and-its-support-for-heterogeneous-programming',
+  start  = time(13, 30),
+  end    = time(15, 00),
+  room   = 'Pacific 1',
+  events = [
+    event(
+      title  = "Session 3",
+      people = ['Rafael Asenjo, Jim Cownie, Aleksei Fedotov'],
+    ),
+  ],
+)
+session(
+  track  = PPoPP_track_4,
+  title  = "High Performance Distributed Deep Learning: A Beginner's Guide",
+  link   = 'http://web.cse.ohio-state.edu/~panda.2/ppopp18_dl_tut.html',
+  start  = time(13, 30),
+  end    = time(15, 00),
+  room   = 'Europa 6',
+  events = [
+    event(
+      title  = "Session 1",
+      people = ['Dhabaleswar K. Panda, Ammar Ahmad Awan, Subramoni Hari'],
+    ),
+  ],
+)
 
 session(
   track  = CC_track_1,
@@ -867,6 +942,7 @@ session(
   link   = "https://cc-conference.github.io/18/",
   start  = time(8, 30),
   end    = time(10, 00),
+  room   = 'Europa 1',
   events = [
     event(title = "Session 5"),
   ],
@@ -877,6 +953,7 @@ session(
   link   = "https://cc-conference.github.io/18/",
   start  = time(10, 30),
   end    = time(12, 00),
+  room   = 'Europa 1',
   events = [
     event(title = "Session 6"),
   ],
@@ -887,6 +964,7 @@ session(
   link   = "https://cc-conference.github.io/18/",
   start  = time(13, 30),
   end    = time(15, 00),
+  room   = 'Europa 1',
   events = [
     event(title = "Session 7"),
   ],
@@ -897,6 +975,7 @@ session(
   link   = "https://cc-conference.github.io/18/",
   start  = time(15, 30),
   end    = time(17, 00),
+  room   = 'Europa 1',
   events = [
     event(title = "Session 8"),
   ],
@@ -921,6 +1000,7 @@ joint_event(
   title  = "HPCA Keynote: What is the role of Architecture and Software Researchers on the Road to Quantum Supremacy?",
   link   = "https://hpca2018.ece.ucsb.edu/pages/keynote.html",
   start  = time(8, 45), end = time(9, 55),
+  room   = 'Europa 4',
   people = ["Margaret Martonosi (Princeton University)"],
 )
 joint_event(
@@ -946,6 +1026,7 @@ session(
   title = 'Best Paper Session',
   start = time(10, 20),
   end   = time(12, 00),
+  room   = 'Europa 4',
   # chair = ,
   events = [
     event(
@@ -974,6 +1055,7 @@ session(
   title = 'Session 2A: Architecture for Neural Network',
   start = time(13, 15),
   end   = time(14, 55),
+  room   = 'Europa 4',
   # chair = ,
   events = [
     event(
@@ -1006,6 +1088,7 @@ session(
   title = 'Session 2B: Cache and Memory',
   start = time(13, 15),
   end   = time(14, 55),
+  room   = 'Europa 5+6',
   # chair = ,
   events = [
     event(
@@ -1039,6 +1122,7 @@ session(
   title  = "Session 3A: Security",
   start  = time(15, 15),
   end    = time(16, 55),
+  room   = 'Europa 4',
   events = [
     event(
       title  = "RCoal: Mitigating GPU Timing Attack via Subwarp-based Randomized Coalescing Techniques",
@@ -1068,6 +1152,7 @@ session(
   title  = "Session 3B: GPU Cache and Memory",
   start  = time(15, 15),
   end    = time(16, 55),
+  room   = 'Europa 5+6',
   events = [
     event(
       title  = "Accelerate GPU Concurrent Kernel Execution by Mitigating Memory Pipeline Stalls",
@@ -1098,6 +1183,7 @@ session(
   title  = "Session 4A: Microarchitecture and Benchmark",
   start  = time(17, 15),
   end    = time(18, 55),
+  room   = 'Europa 4',
   events = [
     event(
       title  = "A Novel Register Renaming Technique for Out-of-Order Processors",
@@ -1126,6 +1212,7 @@ session(
   title  = "Session 4B: Persistent and NVM memory",
   start  = time(17, 15),
   end    = time(18, 55),
+  room   = 'Europa 5+6',
   events = [
     event(
       title  = "Crash Consistency in Encrypted Non-Volatile Main Memory Systems",
@@ -1154,6 +1241,7 @@ session(
   title  = "Session 1: Managed Runtimes",
   start  = time(10, 20),
   end    = time(11, 45),
+  room   = 'Europa 2',
   events = [
     event(
       title  = "SIMD Intrinsics on Managed Language Runtimes",
@@ -1177,6 +1265,7 @@ session(
   title  = "Session 2: Resilience and Security",
   start  = time(13, 15),
   end    = time(14, 55),
+  room   = 'Europa 2',
   events = [
     event(
       title  = "Automating Efficient Variable-Grained Resiliency for Low-Power IoT Systems",
@@ -1202,6 +1291,7 @@ session(
   title  = "Session 3: Best Paper Finalists",
   start  = time(15, 15),
   end    = time(16, 55),
+  room   = 'Europa 2',
   events = [
     event(
       title  = "Poker: Permutation-based SIMD Execution of Intensive Tree Search by Path Encoding",
@@ -1227,6 +1317,7 @@ session(
   title  = "Session 1: Concurrent Data Structures",
   start  = time(10, 20),
   end    = time(11, 45),
+  room   = 'Europa 3',
   events = [
     event(
       title  = "Interval-Based Memory Reclamation",
@@ -1262,6 +1353,7 @@ session(
   title  = "Session 2: Compilers and runtime systems",
   start  = time(13, 15),
   end    = time(14, 55),
+  room   = 'Europa 3',
   events = [
     event(
       title  = "SuperNeurons: Dynamic GPU Memory Management for Training Deep Neural Networks",
@@ -1315,6 +1407,7 @@ session(
   title  = "Session 3: Performance",
   start  = time(15, 15),
   end    = time(16, 55),
+  room   = 'Europa 3',
   events = [
     event(
       title  = "Bridging the Gap between Deep Learning and Sparse Matrix Format Selection",
@@ -1353,6 +1446,7 @@ session(
   title  = 'Artifact Evaluation',
   start  = time(17, 15),
   end    = time(17, 45),
+  room   = 'Europa 4',
   events = [
     event(title = 'CGO Artifact Evaluation')
   ],
@@ -1364,6 +1458,7 @@ session(
   title  = 'Artifact Evaluation',
   start  = time(17, 15),
   end    = time(17, 45),
+  room   = 'Europa 3',
   events = [
     event(title = 'PPoPP Artifact Evaluation')
   ],
@@ -1416,19 +1511,22 @@ joint_event(
   start = time(11, 45), end = time(13, 15),
 )
 joint_event(
-  title = 'Women in Academia and Industry (lunch session in lunch room)',
+  title = 'Women in Academia and Industry Lunch Session',
+  room  = 'lunch room',
   link  = 'http://cgo.org/cgo2018/panel/',
   start = time(11, 45), end = time(12, 30),
 )
 joint_event(
-  title = 'Women in Academia and Industry (panel in same room as following keynote)',
+  title = 'Women in Academia and Industry Panel',
   link  = 'http://cgo.org/cgo2018/panel/',
   start = time(12, 35), end = time(13, 10),
+  room  = 'Europa 4',
 )
 joint_event(
   title  = "CGO Keynote: Biological Computation",
   link   = "http://cgo.org/cgo2018/keynotes/#biological-computation",
   start  = time(13, 15), end = time(14, 25),
+  room  = 'Europa 4',
   people = ["Sara-Jane Dunn (Microsoft Research Limited)"],
 )
 joint_event(
@@ -1451,6 +1549,7 @@ session(
   title  = "Session 5A: GPU",
   start  = time(8, 0),
   end    = time(9, 40),
+  room  = 'Europa 4',
   events = [
     event(
       title  = "Perception-Oriented 3D Rendering Approximation for Modern Graphics Processors",
@@ -1477,6 +1576,7 @@ session(
   title  = "Session 5B: Secure memory",
   start  = time(8, 0),
   end    = time(9, 40),
+  room  = 'Europa 5+6',
   events = [
     event(
       title  = "D-ORAM: Path-ORAM Delegation for Low Execution Interference on Cloud Servers with Untrusted Memory",
@@ -1506,6 +1606,7 @@ session(
   title  = "Session 6A: Novel Architecture",
   start  = time(10, 5),
   end    = time(11, 45),
+  room  = 'Europa 4',
   events = [
     event(
       title  = "A Case for Packageless Processors",
@@ -1537,6 +1638,7 @@ session(
   title  = "Session 6B: In-Memory Computing",
   start  = time(10, 5),
   end    = time(11, 45),
+  room  = 'Europa 5+6',
   events = [
     event(
       title  = "RC-NVM: Enabling Symmetric Row and Column Memory Accesses for In-Memory Databases",
@@ -1568,6 +1670,7 @@ session(
   title  = "Session 7A: Industry Track",
   start  = time(14, 50),
   end    = time(16, 30),
+  room  = 'Europa 4',
   events = [
     event(
       title  = "Don't Correct the Tags in a Cache, just Check their Hamming Distance from the Lookup Tag",
@@ -1599,6 +1702,7 @@ session(
   title  = "Session 7B: Best of CAL",
   start  = time(14, 50),
   end    = time(16, 30),
+  room  = 'Europa 5+6',
   events = [
     event(
       title  = "Resistive Address Decoder",
@@ -1622,6 +1726,7 @@ session(
   title  = "Session 4: Linear Algebra and Vectorization",
   start  = time(8, 0),
   end    = time(9, 40),
+  room  = 'Europa 2',
   events = [
     event(
       title  = "The Generalized Matrix Chain Algorithm",
@@ -1649,6 +1754,7 @@ session(
   title  = "Session 5: Static and Dynamic Analysis",
   start  = time(10, 5),
   end    = time(11, 45),
+  room  = 'Europa 2',
   events = [
     event(
       title  = "Scalable Concurrency Debugging with Distributed Graph Processing",
@@ -1678,6 +1784,7 @@ session(
   title  = "Session 6: Memory usage Optimisation",
   start  = time(14, 50),
   end    = time(16, 30),
+  room  = 'Europa 2',
   events = [
     event(
       title  = "DeLICM: Scalar Dependence Removal at Zero Memory Cost",
@@ -1705,6 +1812,7 @@ session(
   title  = "Session 4: Best Paper Candidates",
   start  = time(8, 00),
   end    = time(9, 40),
+  room   = 'Europa 3',
   events = [
     event(
       title  = "Cache-Tries: Concurrent Lock-Free Hash Tries with Constant-Time Operations",
@@ -1747,6 +1855,7 @@ session(
   title  = "Session 5: Concurrency control and fault tolerance",
   start  = time(10, 5),
   end    = time(11, 45),
+  room   = 'Europa 3',
   events = [
     event(
       title  = "DisCVar: Discovering Critical Variables Using Algorithmic Differentiation for Transient Faults",
@@ -1790,6 +1899,7 @@ session(
   title  = "Session 6: Models and Libraries",
   start  = time(14, 50),
   end    = time(16, 30),
+  room   = 'Europa 3',
   events = [
     event(
       title  = "Making Pull-Based Graph Processing Performant",
@@ -1840,6 +1950,7 @@ joint_event(
   title  = "PPoPP Keynote: From confusion to clarity: hardware concurrency programming models 2008-2018",
   start  = time(8, 0), end = time(9, 0),
   people = ["Peter Sewell (University of Cambridge)"],
+  room  = 'Europa 4',
 )
 joint_event(
   title = 'Coffee Break',
@@ -1855,6 +1966,7 @@ session(
   title  = "Session 8A: Industry Track (applications)",
   start  = time(9, 25),
   end    = time(11, 5),
+  room  = 'Europa 4',
   events = [
     event(
       title  = "Applied Machine Learning at Facebook: A Datacenter Infrastructure Perspective",
@@ -1884,6 +1996,7 @@ session(
   title  = "Session 8B: Memory",
   start  = time(9, 25),
   end    = time(11, 5),
+  room  = 'Europa 5+6',
   events = [
     event(
       title  = "ERUCA: Efficient DRAM Resource Utilization and Resource Conflict Avoidance for Memory System Parallelism",
@@ -1914,6 +2027,7 @@ session(
   title  = "Session 9A: Accelerators",
   start  = time(11, 20),
   end    = time(12, 35),
+  room  = 'Europa 4',
   events = [
     event(
       title  = "OuterSPACE: An Outer product based SPArse matrix multiplication acCElerator",
@@ -1939,6 +2053,7 @@ session(
   title  = "Session 9B: Power",
   start  = time(11, 20),
   end    = time(12, 35),
+  room  = 'Europa 5+6',
   events = [
     event(
       title  = "Power and Energy Characterization of an Open Source 25-core Manycore Processor",
@@ -1963,6 +2078,7 @@ session(
   title  = "Session 7: Program Generation and Synthesis",
   start  = time(9, 25),
   end    = time(11, 5),
+  room   = 'Europa 2',
   events = [
     event(
       title  = "AutoPA: Automatically Generating Active Driver from Original Passive Driver Code",
@@ -1991,6 +2107,7 @@ session(
   title  = "Session 8: Compilation for Specialised Domains",
   start  = time(11, 20),
   end    = time(12, 35),
+  room   = 'Europa 2',
   events = [
     event(
       title  = "Optimal DNN Primitive Selection with Partitioned Boolean Quadratic Programming",
@@ -2014,6 +2131,7 @@ session(
   title  = "Session 7: Parallel frameworks and applications",
   start  = time(9, 25),
   end    = time(11, 5),
+  room   = 'Europa 3',
   events = [
     event(
       title  = "Efficient Shuffle Management with SCache for DAG Computing Frameworks",
@@ -2057,6 +2175,7 @@ session(
   title  = "Session 8: Race Detection",
   start  = time(11, 20),
   end    = time(12, 10),
+  room   = 'Europa 3',
   events = [
     event(
       title  = "VerifiedFT: A Verified, High-Performance Dynamic Race Detector",
@@ -2103,6 +2222,8 @@ session(
   ],
 )
 
+joint_event(start = time(13, 0),)
+
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
@@ -2127,10 +2248,30 @@ if __name__ == '__main__':
 
   args = parser.parse_args()
 
-  print_HTML_table(
-    PROGRAM,
-    dst         = args.output,
-    show_people = args.show_people,
-    font_size   = args.font_size,
-    full_page   = args.full_page,
-  )
+  h = HTML(args.output)
+
+  if args.full_page:
+    h.print_page_header()
+
+  h.print_program_header(font_size=args.font_size)
+
+  saturday, sunday, monday, tuesday, wednesday = slice_per_day(PROGRAM)
+
+  h.print_day(saturday,  show_people=args.show_people, time_column=False)
+  h.print_day(sunday,    show_people=args.show_people, time_column=False)
+  h.print_day(monday,    show_people=args.show_people, time_column=True)
+  h.print_day(tuesday,   show_people=args.show_people, time_column=True)
+  h.print_day(wednesday, show_people=args.show_people, time_column=True)
+
+  h.print_program_footer()
+
+  if args.full_page:
+    h.print_page_footer()
+
+  # print_program(
+  #   PROGRAM,
+  #   dst         = args.output,
+  #   show_people = args.show_people,
+  #   font_size   = args.font_size,
+  #   full_page   = args.full_page,
+  # )

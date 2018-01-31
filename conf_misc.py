@@ -6,6 +6,8 @@ __all__ = [
   'type_check',
   'type_instantiate',
   'least_common_multiple',
+  'Has_Next_Iterator',
+  'has_next',
 ]
 
 
@@ -93,4 +95,55 @@ def type_instantiate(ty, *args, **kwargs):
 def least_common_multiple(a: int, b: int) -> int:
   # https://en.wikipedia.org/wiki/Least_common_multiple#Reduction_by_the_greatest_common_divisor
   return abs(a * b) // math.gcd(a, b)
+
+
+E = TypeVar('E')
+
+
+class Has_Next_Iterator(Iterator[E]):
+  """
+    Iterator that wraps another iterator and adds
+    a has_next() method that checks if the iterator is empty
+  """
+
+  _SENTINEL  = object()
+
+  def __init__(self, it: Iterator[E]):
+    self._iter = iter(it)
+    self._peek = self._SENTINEL
+
+  def __iter__(self):
+    return self
+
+  def __next__(self):
+    if self._peek is self._SENTINEL:
+      return next(self._iter)
+    else:
+      out = self._peek
+      self._peek = self._SENTINEL
+      return out
+
+  def has_next(self):
+    if self._peek is self._SENTINEL:
+      try:
+        self._peek = next(self._iter)
+      except StopIteration:
+        return False
+
+    return True
+
+  def __bool__(self):
+    return self.has_next()
+
+
+def has_next(fn):
+  """
+    Wraps the generator iterator returned by a function in a Has_Next_Iterator
+  """
+
+  def wrapper(*args, **kwargs):
+    gen = fn(*args, **kwargs)
+    return Has_Next_Iterator(gen)
+
+  return wrapper
 

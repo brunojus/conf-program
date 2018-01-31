@@ -4,17 +4,20 @@ from conf_misc  import *
 import abc
 import collections
 import html
+import io
 import sys
 import textwrap
 import typing
 
 __all__ = [
-  'print_HTML_table',
+  'HTML',
+  'print_program',
+  'slice_per_day',
 ]
 
 
-def print_HTML_table(program: Program, dst: typing.IO[str] = sys.stdout, *,
-                     show_people: bool, font_size: int, full_page: bool):
+def print_program(program: Program, dst: typing.IO[str] = sys.stdout, *,
+                  show_people: bool, font_size: int, full_page: bool):
   """
     print HTML for program to stream.
 
@@ -24,166 +27,254 @@ def print_HTML_table(program: Program, dst: typing.IO[str] = sys.stdout, *,
       :full_page     whether to generate a standalone page or just a embeddable <div>
   """
 
-  h = HTML_Writer(dst)
+  h = HTML(dst)
 
   if full_page:
+    h.print_page_header()
+
+  h.print_program_header(font_size=font_size)
+
+  for day in slice_per_day(program):
+    h.print_day(day, show_people=show_people)
+
+  h.print_program_footer()
+
+  if full_page:
+    h.print_page_footer()
+
+
+class HTML:
+  def __init__(self, dst: typing.IO[str] = sys.stdout):
+    self._writer = HTML_Writer(dst)
+
+  def print_page_header(self):
+    h = self._writer
+
     h.html('<!DOCTYPE html>')
     h.open('html')
     h.open('head')
     h.open('title')
     h.html('HPCA/CGO/PPoPP/CC 2018 Program Schedule (Fed 24-28, 2018), Vienna, Austria')
     h.close('title')
-  h.open('style', 'type="text/css"')
-  h.html(f'''\
-  /*
-    ! OVERRIDE bootstrap.theme.css used by conf.researchr !
-  */
-
-  /*
-    Bootstrap limits the main element 'div.container' width.
-    The width it chooses is too small for our table so we override it.
-  */
-  div.container {{
-    width:   90%;
-    margin: auto;
-  }}
-
-  /*
-    bootstrap adds a gray top border to all cells, we have our own border stuff
-  */
-  td {{
-    border-top: none;
-  }}
-
-  /*
-    ! our own CSS !
-  */
-
-  div#conf_program {{
-    font-family: 'Ubuntu', sans-serif;
-  }}
-
-  table {{
-    width:           100%;
-    font-size:       {font_size}pt;
-    border-collapse: collapse;
-  }}
-  th {{
-    border: 1px solid black;
-  }}
-  .border-left {{
-    border-left: 1px solid black;
-  }}
-  .border-right {{
-    border-right: 1px solid black;
-  }}
-  .border-top {{
-    border-top: 1px solid black;
-  }}
-  .border-bottom {{
-    border-bottom: 1px solid black;
-  }}
-  th, td {{
-    padding: .5em;
-  }}
-  td.time {{
-    white-space: nowrap;
-  }}
-
-  .HPCA {{
-    background-color: #FFF2CC;
-  }}
-  .CGO {{
-    background-color: #D9EBD3;
-  }}
-  .PPoPP {{
-    background-color: #CFE2F3;
-  }}
-  .CC {{
-    background-color: #c4afcf;
-  }}
-
-  /* help printing preserve colors */
-  @media print {{
-    body {{
-      -webkit-print-color-adjust: exact; /*Chrome, Safari */
-      color-adjust: exact; /*Firefox*/
-    }}
-
-    .HPCA {{
-      background-color: #FFF2CC !important;
-    }}
-    .CGO {{
-      background-color: #D9EBD3;
-    }}
-    .PPoPP {{
-      background-color: #CFE2F3;
-    }}
-    .CC {{
-      background-color: #c4afcf;
-    }}
-  }}
-''')
-  h.close('style')
-  h.html('<!-- enable Google fonts "Ubuntu" font -->')
-  h.html('<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">')
-
-  if full_page:
     h.close('head')
     h.open('body')
-  h.open('div', id="conf_program")
 
-  def render_session(program: Program, conf: Conference, sessions: typing.List[Session],
-                     num_cols: int, html: HTML_Writer) -> typing.Iterable[None]:
-    for session in sessions:
-      events = list(program.session_events(session))
+  def print_page_footer(self):
+    h = self._writer
 
-      assert events
+    h.close('body')
+    h.close('html')
 
-      ## session time & name
+  def print_program_header(self, *, font_size: int):
+    h = self._writer
 
-      html.open('td', f'class="{conf.name} border-left border-top time"')
-      html.text(time_range_str(session.start, session.end))
-      html.close('td')
-      html.open('td', f'class="{conf.name} border-right border-top"', colspan = num_cols - 1)
-      if session.link:
-        html.open('a', f'href="{session.link}"')
-      if session.title:
-        html.html(session.title)
-      if session.link:
-        html.close('a')
-      html.close('td')
-      yield
+    h.open('div', id="conf_program")
+    self.print_style(font_size=font_size)
 
-      ## session events
+  def print_program_footer(self):
+    h = self._writer
 
-      last_event = events[-1]
+    h.close('div', comment='id="conf_program"')
 
-      for event in events:
-        h.html(f'<td class="{conf.name} border-left"></td>')
-        h.open('td', f'class="{conf.name} border-right"', colspan = num_cols - 1)
-        if event.link:
-          h.open('a', f'href="{event.link}"')
-        h.open('strong')
-        h.text(event.title)
-        h.close('strong')
-        if event.link:
-          h.close('a')
-        if show_people and event.people:
-          h.html('<br>')
-          h.html(event.people)
-        h.close('td')
-        yield
+  def print_style(self, *, font_size: int):
+    h = self._writer
 
-    ## padding (when other sessions have more events)
-    while True:
-      h.html(f'<td class="{conf.name} border-left"></td>')
-      h.html(f'<td class="{conf.name} border-right" colspan="{num_cols - 1}"></td>')
-      yield
+    h.open('style', 'type="text/css"')
+    h.html(f'''\
+      /*
+        ! OVERRIDE bootstrap.theme.css used by conf.researchr !
+      */
 
-  for day in slice_per_day(program):
+      /*
+        Bootstrap limits the main element 'div.container' width.
+        The width it chooses is too small for our table so we override it.
+      */
+      div.container {{
+        width:   90%;
+        margin: auto;
+      }}
+
+      /*
+        bootstrap adds a gray top border to all cells, we have our own border stuff
+      */
+      td {{
+        border-top: none;
+      }}
+
+      /*
+        ! our own CSS !
+      */
+
+      div#conf_program {{
+        font-family: 'Ubuntu', sans-serif;
+      }}
+
+      table {{
+        width:           100%;
+        font-size:       {font_size}pt;
+        border-collapse: collapse;
+      }}
+      th {{
+        border: 1px solid black;
+      }}
+      .border-left {{
+        border-left: 1px solid black;
+      }}
+      .border-right {{
+        border-right: 1px solid black;
+      }}
+      .border-top {{
+        border-top: 1px solid black;
+      }}
+      .border-bottom {{
+        border-bottom: 1px solid black;
+      }}
+      th, td {{
+        padding: .5em;
+      }}
+      td.time {{
+        white-space: nowrap;
+      }}
+
+      .HPCA {{
+        background-color: #FFF2CC;
+      }}
+      .CGO {{
+        background-color: #D9EBD3;
+      }}
+      .PPoPP {{
+        background-color: #CFE2F3;
+      }}
+      .CC {{
+        background-color: #c4afcf;
+      }}
+
+      /* help printing preserve colors */
+      @media print {{
+        body {{
+          -webkit-print-color-adjust: exact; /*Chrome, Safari */
+          color-adjust: exact; /*Firefox*/
+        }}
+
+        .HPCA {{
+          background-color: #FFF2CC !important;
+        }}
+        .CGO {{
+          background-color: #D9EBD3;
+        }}
+        .PPoPP {{
+          background-color: #CFE2F3;
+        }}
+        .CC {{
+          background-color: #c4afcf;
+        }}
+      }}
+    ''')
+    h.close('style')
+    h.html('<!-- enable Google fonts "Ubuntu" font -->')
+    h.html('<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">')
+
+  def print_day(self, day, *, show_people: bool, time_column: bool = True):
+    """
+      print HTML table for one day.
+
+      params:
+        :show_people show people associated with events
+        :time_column whether to put session times into their own column
+    """
+
     assert len(list(day.conferences)), [s.title for s in day.joint_events]
     assert len(list(day.sessions)) or len(list(day.joint_events))
+
+    h = self._writer
+
+    # h2 = HTML_Writer(io.StringIO())
+
+    def _render_session(program: Program, conf: Conference, sessions: typing.List[Session],
+                        num_cols: int) -> typing.Iterable[None]:
+      """
+        generator that prints <td> elements for one row every time you call next on it.
+        When done with its main content it just emits empty <td>s forever
+      """
+
+      # h = h2
+
+      assert num_cols > 1
+      assert len(sessions)
+
+      if time_column:
+        num_cols -= 1
+        left_border = ''
+      else:
+        left_border = 'border-left'
+
+      for session in sessions:
+        events = list(program.session_events(session))
+
+        assert events
+
+        ## session time, room, & name
+
+        if not time_column:
+          h.open('td', f'class="{conf.name} {left_border} border-right border-top"', colspan = num_cols)
+          h.text(time_range_str(session.start, session.end))
+          h.close('td')
+          top_border = ''
+          yield True
+        else:
+          top_border = 'border-top'
+
+        if time_column:
+          h.open('td', f'class="{conf.name} border-left {top_border} time"')
+          h.text(time_range_str(session.start, session.end))
+          h.close('td')
+
+        h.open('td', f'class="{conf.name} {left_border} border-right {top_border}"', colspan = num_cols)
+
+        if session.link:
+          h.open('a', f'href="{session.link}"')
+        if session.title:
+          h.text(session.title)
+        if session.link:
+          h.close('a')
+
+        if session.room:
+          h.html('&nbsp;')
+          h.text('(' + session.room + ')')
+
+        h.close('td')
+        yield True
+
+        ## session events
+
+        last_event = events[-1]
+
+        for event in events:
+          if time_column:
+            h.html(f'<td class="{conf.name} border-left"></td>')
+
+          h.open('td', f'class="{conf.name} {left_border} border-right"', colspan = num_cols)
+
+          if event.link:
+            h.open('a', f'href="{event.link}"')
+          h.open('strong')
+          h.text(event.title)
+          h.close('strong')
+          if event.link:
+            h.close('a')
+          if show_people and event.people:
+            h.html('<br>')
+            h.html(event.people)
+          h.close('td')
+          yield True
+
+      ## padding (when other sessions have more events)
+      while True:
+        if time_column:
+          h.html(f'<td class="{conf.name} border-left"></td>')
+
+        h.html(f'<td class="{conf.name} {left_border} border-right" colspan="{num_cols}"></td>')
+        yield False
 
     num_cols, cols_per_conf = compute_table_columns(day)
 
@@ -225,64 +316,92 @@ def print_HTML_table(program: Program, dst: typing.IO[str] = sys.stdout, *,
               #         | HPCA closing    |
               #        Need to merge tracks for HPCA closing.
               sessions = program.track_sessions(track)
-              assert len(sessions) == 1, \
+              assert len(sessions) == 1, (
                 f'problem in track {track.id!r} {[s.title for s in sessions]!r} before {joint!r}'
+              )
               session = next(iter(sessions))
 
               num_rows = max(num_rows, 1 + sum([len(list(program.session_events(s))) for s in sessions]))
 
-              renderers.append(render_session(program, c, sessions, cols_per_track, h))
+              renderers.append(_render_session(program, c, sessions, cols_per_track))
           else:
-            renderers.append(render_session(program, c, [], cols_per_conf[c], h))
+            renderers.append(_render_session(program, c, [], cols_per_conf[c]))
 
         assert num_rows > 0, 'slice with no events??'
 
-        for row in range(0, num_rows):
-          if row == 0:
-            # first row has a border to top
-            clss = 'border-top'
-          elif row == (num_rows - 1):
-            # last row has a border to bottom
-            clss = 'border-bottom'
-          else:
-            clss = ''
+        while True:
+        # for row in range(0, num_rows):
+          # if row == 0:
+          #   # first row has a border to top
+          #   clss = 'border-top'
+          # elif row == (num_rows - 1):
+          #   # last row has a border to bottom
+          #   clss = 'border-bottom'
+          # else:
+          #   clss = ''
+          clss = ''
+
+          has_more = False
 
           h.open('tr', f'class="{clss}"')
           for r in renderers:
-            next(r)
+            has_more |= next(r)
           h.close('tr')
+
+          if not has_more:
+            h.open('tr', f'class="border-bottom"')
+            h.close('tr')
+            break
 
       if joint and joint.title:
         h.open('tr', 'class="border-left border-top border-right border-bottom"', comment='joint')
-        h.open('td', 'class="time"')
+
+        assert num_cols > 1
+
+        if time_column:
+          cols = num_cols - 1
+        else:
+          cols = num_cols
+
         if joint.title:
-          h.html(time_range_str(joint.start, joint.end))
-        h.close('td')
-        h.open('td', f'colspan="{num_cols - 1}"')
-        if joint.link:
-          h.open('a', f'href="{joint.link}"')
-        h.open('strong')
-        h.text(joint.title)
-        h.close('strong')
-        if joint.link:
-          h.close('a')
-        if joint.people:
-          h.html('<br>')
-          h.html(joint.people)
-        h.close('td')
-        h.close('tr')
+          if time_column:
+            h.open('td', 'class="time"')
+            h.text(time_range_str(joint.start, joint.end))
+            h.close('td')
+
+          h.open('td', f'colspan="{cols}"')
+          if not time_column:
+            h.text(time_range_str(joint.start, joint.end))
+            h.html('&nbsp;')
+
+          if joint.title:
+            if joint.link:
+              h.open('a', f'href="{joint.link}"')
+            h.open('strong')
+            h.text(joint.title)
+            h.close('strong')
+            if joint.link:
+              h.close('a')
+          if joint.room:
+            h.html('&nbsp;')
+            h.text('(' + joint.room + ')')
+          if joint.people:
+            h.html('<br>')
+            h.html(joint.people)
+          h.close('td')
+          h.close('tr')
+        else:
+          h.open('td', colspan=cols)
+          h.close('td')
+
+    h.open('tr', f'class="border-top"')
+    h.open('td', colspan=num_cols)
+    h.close('td')
+    h.close('tr')
 
     h.close('tbody')
     h.close('table')
     h.html('<p style="page-break-after: always;"></p>')
-
-  h.close('div', comment='id="conf_program"')
-
-  if full_page:
-    h.close('body')
-    h.close('html')
-
-  return
 
 
 class HTML_Writer:
@@ -290,8 +409,8 @@ class HTML_Writer:
     small helper for printing HTML_Writer
   """
 
-  def __init__(self, dst):
-    self.lvl = 0
+  def __init__(self, dst, initial_indent: int = 0):
+    self.lvl = initial_indent
     self.dst = dst
 
     # validation
