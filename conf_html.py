@@ -15,6 +15,9 @@ __all__ = [
   'slice_per_day',
 ]
 
+## HTML non breaking space
+NBSP = "\u00A0"
+
 
 def print_program(program: Program, dst: typing.IO[str] = sys.stdout, *,
                   show_people: bool, font_size: int, full_page: bool):
@@ -213,23 +216,39 @@ class HTML:
 
         assert events
 
-        ## session time, room, & name
-
-        if not time_column:
-          h.open('td', f'class="{conf.name} {left_border} border-right border-top"', colspan = num_cols)
-          h.text(time_range_str(session.start, session.end))
-          h.close('td')
-          top_border = ''
-          yield True
-        else:
-          top_border = 'border-top'
+        ## session time, room
 
         if time_column:
+          ## time gets one column, room name is put in the remaining columns
+          top_border = 'border-top'
+
           h.open('td', f'class="{conf.name} border-left {top_border} time"')
           h.text(time_range_str(session.start, session.end))
           h.close('td')
 
-        h.open('td', f'class="{conf.name} {left_border} border-right {top_border}"', colspan = num_cols)
+          h.open('td', f'class="{conf.name} {left_border} border-right {top_border}"', colspan = num_cols)
+          if session.room:
+            h.text('(' + NBSP.join(session.room.split()) + ')')
+          h.close('td')
+          yield True
+        else:
+          ## time and room share all available columns (separete by NBSP to avoid ugly line break)
+          top_border = ''
+
+          h.open('td', f'class="{conf.name} {left_border} border-right border-top"', colspan = num_cols)
+          text = time_range_str(session.start, session.end)
+          if session.room:
+            text += NBSP + '(' + NBSP.join(session.room.split()) + ')'
+          h.text(text)
+          h.close('td')
+          yield True
+
+        ## session name
+
+        if time_column:
+          h.html(f'<td class="{conf.name} border-left"></td>')
+
+        h.open('td', f'class="{conf.name} {left_border} border-right"', colspan = num_cols)
 
         if session.link:
           h.open('a', f'href="{session.link}"')
@@ -237,10 +256,6 @@ class HTML:
           h.text(session.title)
         if session.link:
           h.close('a')
-
-        if session.room:
-          h.html('&nbsp;')
-          h.html('(' + '&nbsp;'.join(session.room.split()) + ')')
 
         h.close('td')
         yield True
@@ -374,6 +389,10 @@ class HTML:
             h.text(time_range_str(joint.start, joint.end))
             h.html('&nbsp;')
 
+          if joint.room:
+            h.html('&nbsp;')
+            h.text('(' + joint.room + ')')
+
           if joint.title:
             if joint.link:
               h.open('a', f'href="{joint.link}"')
@@ -382,9 +401,6 @@ class HTML:
             h.close('strong')
             if joint.link:
               h.close('a')
-          if joint.room:
-            h.html('&nbsp;')
-            h.text('(' + joint.room + ')')
           if (show_people or joint.important_people) and joint.people:
             h.html('<br>')
             h.html(joint.people)
@@ -645,6 +661,6 @@ def time_range_str(start: datetime.time, end: datetime.time) -> str:
   assert start
 
   if end:
-    return f'[{time_str(start)} - {time_str(end)}]'
+    return f'[{time_str(start)}{NBSP}-{NBSP}{time_str(end)}]'
   else:
     return f'[{time_str(start)}]'
