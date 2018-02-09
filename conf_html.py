@@ -8,6 +8,7 @@ import io
 import sys
 import textwrap
 import typing
+import types
 
 __all__ = [
   'HTML',
@@ -57,7 +58,7 @@ class HTML:
     h.open('html')
     h.open('head')
     h.open('title')
-    h.html('HPCA/CGO/PPoPP/CC 2018 Program Schedule (Fed 24-28, 2018), Vienna, Austria')
+    h.text('HPCA/CGO/PPoPP/CC 2018 Program Schedule (Fed 24-28, 2018), Vienna, Austria')
     h.close('title')
     h.close('head')
     h.open('body')
@@ -171,11 +172,22 @@ class HTML:
         .CC {{
           background-color: #c4afcf;
         }}
+
+        .page-break {{
+          page-break-after: always;
+        }}
       }}
     ''')
     h.close('style')
     h.html('<!-- enable Google fonts "Ubuntu" font -->')
-    h.html('<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">')
+    h.tag('link', href="https://fonts.googleapis.com/css?family=Ubuntu", rel="stylesheet")
+
+  def print_header(self, txt):
+    h = self._writer
+
+    h.open('h2')
+    h.text(txt)
+    h.close('h2')
 
   def print_day(self, day, *, show_people: bool, time_column: bool = True):
     """
@@ -191,16 +203,12 @@ class HTML:
 
     h = self._writer
 
-    # h2 = HTML_Writer(io.StringIO())
-
     def _render_session(program: Program, conf: Conference, sessions: typing.List[Session],
                         num_cols: int) -> typing.Iterable[None]:
       """
         generator that prints <td> elements for one row every time you call next on it.
         When done with its main content it just emits empty <td>s forever
       """
-
-      # h = h2
 
       assert num_cols > 1
       assert len(sessions)
@@ -228,7 +236,7 @@ class HTML:
 
           h.open('td', f'class="{conf.name} {left_border} border-right {top_border}"', colspan = num_cols)
           if session.room:
-            h.text('(' + NBSP.join(session.room.split()) + ')')
+            h.text('Room:', NBSP.join(session.room.split()))
           h.close('td')
           yield True
         else:
@@ -238,7 +246,7 @@ class HTML:
           h.open('td', f'class="{conf.name} {left_border} border-right border-top"', colspan = num_cols)
           text = time_range_str(session.start, session.end)
           if session.room:
-            text += NBSP + '(' + NBSP.join(session.room.split()) + ')'
+            text += NBSP + 'Room:' + NBSP + NBSP.join(session.room.split())
           h.text(text)
           h.close('td')
           yield True
@@ -259,6 +267,17 @@ class HTML:
 
         h.close('td')
         yield True
+
+        ## session chair
+
+        if session.chair:
+          if time_column:
+            h.html(f'<td class="{conf.name} border-left"></td>')
+
+          h.open('td', f'class="{conf.name} {left_border} border-right"', colspan = num_cols)
+          h.text('Session chair:', session.chair)
+          h.close('td')
+          yield True
 
         ## session events
 
@@ -293,12 +312,10 @@ class HTML:
 
     num_cols, cols_per_conf = compute_table_columns(day)
 
-    h.open('h3')
     date = next(iter(day.sessions)).day
-    h.html(day_str(date))
-    h.close('h3')
-    h.open('table')
+    self.print_header(day_str(date))
 
+    h.open('table')
     h.open('thead')
     h.open('tr', comment='conf headers')
 
@@ -323,19 +340,18 @@ class HTML:
             for track in tracks:
               cols_per_track = cols_per_conf[c] // len(tracks)
 
-              # FIXME: we can currently only have one session per track between two joint events
-              #        if we want more than one session per conf we need to possibly remerge
-              #        after the conf split into two tracks.
+              assert (cols_per_conf[c] // len(tracks)) == (cols_per_conf[c] / len(tracks))
+
+              # FIXME: All sessions for one conference between two joint events currently
+              #        have to have the same number of tracks.
+              #        If we want different numbers of tracks per conf we need to possibly
+              #        remerge after the conf split into two tracks.
               #        Example:
               #         | HPCA-A | HPCA-B |
               #         | HPCA closing    |
               #        Need to merge tracks for HPCA closing.
               sessions = program.track_sessions(track)
-              # assert len(sessions) == 1, (
-              #   f'problem in track {track.id!r} {[s.title for s in sessions]!r} before {joint!r}'
-              # )
-              session = next(iter(sessions))
-
+              session  = next(iter(sessions))
               num_rows = max(num_rows, 1 + sum([len(list(program.session_events(s))) for s in sessions]))
 
               renderers.append(_render_session(program, c, sessions, cols_per_track))
@@ -345,15 +361,6 @@ class HTML:
         assert num_rows > 0, 'slice with no events??'
 
         while True:
-        # for row in range(0, num_rows):
-          # if row == 0:
-          #   # first row has a border to top
-          #   clss = 'border-top'
-          # elif row == (num_rows - 1):
-          #   # last row has a border to bottom
-          #   clss = 'border-bottom'
-          # else:
-          #   clss = ''
           clss = ''
 
           has_more = False
@@ -402,8 +409,7 @@ class HTML:
             if joint.link:
               h.close('a')
           if (show_people or joint.important_people) and joint.people:
-            h.html('<br>')
-            h.html(joint.people)
+            h.text(NBSP, joint.people)
           h.close('td')
           h.close('tr')
         else:
@@ -417,7 +423,13 @@ class HTML:
 
     h.close('tbody')
     h.close('table')
-    h.html('<p style="page-break-after: always;"></p>')
+    self.page_break()
+
+  def tag(self, tag, *attrs, comment = None, **kwargs):
+    return self._writer.tag(tag, *attrs, comment=comment, **kwargs)
+
+  def page_break(self):
+    self._writer.tag('p', 'class="page-break"')
 
 
 class HTML_Writer:
@@ -451,24 +463,29 @@ class HTML_Writer:
     )
 
   def open(self, tag, *attrs, comment = None, **kwattrs):
-    txt = [
-      # TODO: quote/validate
-      tag,
-      *attrs,
-      *(f'{key}={repr(str(kwattrs[key]))}' for key in kwattrs)
-    ]
+    """
+      Print HTML open tag <xoxo>
+    """
 
-    self.dst.write(' ' * self.lvl)
-    self.dst.write('<' + ' '.join(txt) + '>')
-    if comment:
-      self.dst.write(f' <!-- {comment} -->')
-    self.dst.write('\n')
+    assert tag
+
+    # print('BGN' + '  ' * self.lvl, tag)
+
+    self.tag(tag, *attrs, comment=comment, **kwattrs)
     self.lvl += 2
 
     # validation
     self.tag_stack.append(tag)
 
   def close(self, tag, comment = ''):
+    """
+      Print HTML open tag </xoxo>
+    """
+
+    assert tag
+
+    # print('END' + '  ' * (self.lvl - 2), tag)
+
     # validation
     assert self.tag_stack
     expected = self.tag_stack.pop()
@@ -479,6 +496,26 @@ class HTML_Writer:
 
     self.dst.write(' ' * self.lvl)
     self.dst.write(f'</{tag}>')
+    if comment:
+      self.dst.write(f' <!-- {comment} -->')
+    self.dst.write('\n')
+
+  def tag(self, tag, *attrs, comment = None, **kwattrs):
+    """
+      Print HTML tag that needs no closing tag <xoxo>
+    """
+
+    assert tag
+
+    txt = [
+      # TODO: quote/validate
+      tag,
+      *attrs,
+      *(f'{key}={repr(str(kwattrs[key]))}' for key in kwattrs)
+    ]
+
+    self.dst.write(' ' * self.lvl)
+    self.dst.write('<' + ' '.join(txt) + '>')
     if comment:
       self.dst.write(f' <!-- {comment} -->')
     self.dst.write('\n')
@@ -604,40 +641,30 @@ def compute_table_columns(program) -> typing.Tuple[int, typing.Dict[Conference, 
 
   num_conferences = len(program.conferences)
 
-  ## compute total number of columns for table
-
-  # at least one column per conference
-  num_cols = num_conferences
-
-  for subprogram, _ in slice_by_joint_events(program):
-    # skip trailing empty program
-    if not subprogram.conferences:
-      continue
-
-    # every track gets at least two columns
-    currenty_active_tracks = len(subprogram.tracks) * 2
-
-    num_cols = least_common_multiple(num_cols, currenty_active_tracks)
+  # every track gets at least two columns
+  track_min_cols = 2
 
   ## compute number of columns per conference
 
-  cols_per_conf = collections.Counter()
-
-  max_active_tracks          = len(program.conferences)
-  cols_per_track             = safe_div(num_cols, max_active_tracks)
+  cols_per_conf = {
+    c: track_min_cols * len(program.conference_tracks(c))
+    for c in program.conferences
+  }
 
   for subprogram, _ in slice_by_joint_events(program):
     # skip trailing empty program
     if not subprogram.conferences:
       continue
 
-    currently_active_tracks = len(subprogram.tracks)
+    for conf in subprogram.conferences:
+      num_tracks          = len(subprogram.conference_tracks(conf)) * track_min_cols
+      cols_per_conf[conf] = least_common_multiple(cols_per_conf[conf], num_tracks)
 
-    if currently_active_tracks > max_active_tracks:
-      cols_per_track = safe_div(num_cols, currently_active_tracks)
+  cols_per_conf = types.MappingProxyType(cols_per_conf)
 
-      for conf in subprogram.conferences:
-        cols_per_conf[conf] = cols_per_track * len(subprogram.conference_tracks(conf))
+  ## compute total number of columns for table
+
+  num_cols = sum(cols_per_conf.values())
 
   return num_cols, cols_per_conf
 
