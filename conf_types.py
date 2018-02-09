@@ -181,12 +181,13 @@ class Session(Struct):
 
 class Event(Struct):
   _fields = (
-    ('title',   str),
-    ('session', Session),
-    ('people',  Optional[str], None),
-    ('link',    Optional[str], None),
-    ('start',   Optional[datetime.datetime], None),
-    ('end',     Optional[datetime.datetime], None),
+    ('title',            str),
+    ('session',          Session),
+    ('people',           Optional[str], None),
+    ('link',             Optional[str], None),
+    ('start',            Optional[datetime.datetime], None),
+    ('end',              Optional[datetime.datetime], None),
+    ('important_people', bool, False),
   )
 
   def _post_init(self):
@@ -194,6 +195,10 @@ class Event(Struct):
 
     assert (self.start is None) or (self.start >= self.session.start)
     assert (self.end   is None) or (self.end   <= self.session.end)
+
+    assert (self.start is None and self.end is None) or (self.start < self.end)
+
+    assert not self.important_people or self.people
 
   @property
   def day(self):
@@ -204,16 +209,21 @@ class Event(Struct):
 
 class Joint_Event(Struct):
   _fields = (
-    ('start',  datetime.datetime),
-    ('title',  Optional[str], None),
-    ('end',    Optional[datetime.datetime], None),
-    ('link',   Optional[str], None),
-    ('people', Optional[str], None),
-    ('room',   Optional[str], None),
+    ('start',            datetime.datetime),
+    ('title',            Optional[str], None),
+    ('end',              Optional[datetime.datetime], None),
+    ('link',             Optional[str], None),
+    ('people',           Optional[str], None),
+    ('room',             Optional[str], None),
+    ('important_people', bool, False),
   )
 
   def _post_init(self):
     assert not self.link or not self.people or self.title
+
+    assert (self.end is None) or (self.start < self.end)
+
+    assert not self.important_people or self.people
 
   @property
   def day(self):

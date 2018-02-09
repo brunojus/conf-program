@@ -262,7 +262,7 @@ class HTML:
           h.close('strong')
           if event.link:
             h.close('a')
-          if show_people and event.people:
+          if (show_people or event.important_people) and event.people:
             h.html('<br>')
             h.html(event.people)
           h.close('td')
@@ -316,9 +316,9 @@ class HTML:
               #         | HPCA closing    |
               #        Need to merge tracks for HPCA closing.
               sessions = program.track_sessions(track)
-              assert len(sessions) == 1, (
-                f'problem in track {track.id!r} {[s.title for s in sessions]!r} before {joint!r}'
-              )
+              # assert len(sessions) == 1, (
+              #   f'problem in track {track.id!r} {[s.title for s in sessions]!r} before {joint!r}'
+              # )
               session = next(iter(sessions))
 
               num_rows = max(num_rows, 1 + sum([len(list(program.session_events(s))) for s in sessions]))
@@ -385,7 +385,7 @@ class HTML:
           if joint.room:
             h.html('&nbsp;')
             h.text('(' + joint.room + ')')
-          if joint.people:
+          if (show_people or joint.important_people) and joint.people:
             h.html('<br>')
             h.html(joint.people)
           h.close('td')
