@@ -87,7 +87,7 @@ joint_event(
 )
 joint_event(
   title = 'Heurigen: Toni & Birgit Nigl',
-  link  = 'http://www.nigl.me/index.php?id=25',
+  link  = 'https://ppopp18.sigplan.org/attending/heurigen',
   start = time(18, 30),
 )
 
@@ -105,15 +105,18 @@ session(
     ),
     event(
       title  = 'Keynote 1: "Accelerating Genome Analysis: A Primer on an Ongoing Journey"',
-      people = ["Onur Mutlu (ETH, CMU)", ]
+      people = ["Onur Mutlu (ETH, CMU)", ],
+      important_people = True,
     ),
     event(
       title  = "Exploring Speed/Accuracy Trade-offs",
-      people = ["Mohammed Alser+, Hasan Hassan*, Akash Kumar&, Onur Mutlu* and Can Alkan+ (+Bilkent Univ., *ETH Zurich, &TU Dresden)"]
+      people = ["Mohammed Alser+, Hasan Hassan*, Akash Kumar&, Onur Mutlu* "
+                "and Can Alkan+ (+Bilkent Univ., *ETH Zurich, &TU Dresden)"]
     ),
     event(
       title  = "Accelerating Duplicate Marking In The Cloud",
-      people = ["Lisa Wu, Frank Nothaft, Brendan Sweeney, David Bruns-Smith, Sagar Karandikar, Johnny Le, Howard Mao, Krste Asanovic, David Patterson and Anthony Joseph (UC Berkeley)"]
+      people = ["Lisa Wu, Frank Nothaft, Brendan Sweeney, David Bruns-Smith, Sagar Karandikar, "
+                "Johnny Le, Howard Mao, Krste Asanovic, David Patterson and Anthony Joseph (UC Berkeley)"]
     ),
   ],
 )
@@ -127,7 +130,8 @@ session(
   events = [
     event(
       title  = 'Invited Talk: "Next Generation Sequencing: Big Data meets High Performance Computing Architectures"',
-      people = ['Bertil Schmidt (JGU Mainz)']
+      people = ['Bertil Schmidt (JGU Mainz)'],
+      important_people = True,
     ),
     event(
       title  = 'GAME: GPU Acceleration of Metagenomics Clustering',
@@ -135,7 +139,8 @@ session(
     ),
     event(
       title  = "Exact Alignment with FM-index on the Intel Xeon Phi Knights Landing Processor",
-      people = ["Jose M. Herruzo+, Sonia Gonzalez-Navarro+, Pablo Ibañez*, Victor Viñals*, Jesus Alastruey* and Oscar Plata+ (+Univ. of Malaga, *Univ. of Zaragoza)"]
+      people = ["Jose M. Herruzo+, Sonia Gonzalez-Navarro+, Pablo Ibañez*, Victor Viñals*, "
+                "Jesus Alastruey* and Oscar Plata+ (+Univ. of Malaga, *Univ. of Zaragoza)"]
     ),
     event(
       title  = "Optimizations of Sequence Alignment on FPGA: A Case Study of Extended Sequence Alignment",
@@ -154,6 +159,7 @@ session(
     event(
       title  = 'Keynote 2: "Automata Processor and its Applications in Bioinformatics"',
       people = ['Srinivas Aluru (Georgia Tech)'],
+      important_people = True,
     ),
     event(
       title  = 'Streaming Gap-Aware Seed Alignment on the Cache Automaton',
@@ -179,7 +185,8 @@ session(
   events = [
     event(
       title  = 'Invited Talk: "Addressing Computational Burden to Realize Precision Medicine"',
-      people = ['Can Alkan (Bilkent University)']
+      people = ['Can Alkan (Bilkent University)'],
+      important_people = True,
     ),
     event(
       title  = "Burrows-Wheeler Short Read Aligner on AWS EC2 F1",
@@ -262,7 +269,8 @@ session(
   events = [
     event(
       title  = 'Panel Session: "Industrial perspective of high-speed communication technology evolution"',
-      people = ['moderated by Prof. Young Cho (University of Southern California)']
+      people = ['moderated by Prof. Young Cho (University of Southern California)'],
+      important_people = True,
     ),
   ],
 )
@@ -296,7 +304,7 @@ session(
 session(
   track  = CGO_track_1,
   title  = "LLVM Performance Workshop",
-  link   = "https://sites.google.com/site/realworlddsl/",
+  link   = "https://llvm.org/devmtg/2018-02-24/",
   start  = time(13, 30),
   end    = time(15, 00),
   room   = 'Europa 2',
@@ -309,7 +317,7 @@ session(
 session(
   track  = CGO_track_1,
   title  = "LLVM Performance Workshop",
-  link   = "https://sites.google.com/site/realworlddsl/",
+  link   = "https://llvm.org/devmtg/2018-02-24/",
   start  = time(15, 30),
   end    = time(17, 00),
   room   = 'Europa 2',
@@ -322,12 +330,20 @@ session(
   track  = CGO_track_2,
   title  = "RWDSL'18: 3rd International Workshop on Real World Domain Specific Languages",
   link   = "https://sites.google.com/site/realworlddsl/",
-  start  = time(8, 30),
+  start  = time(9, 15),
   end    = time(10, 00),
-  room   = 'Europa 6',
   events = [
     event(
-      title  = "Session 1",
+      title  = "Welcome",
+      start  = time(9, 15),
+      end    = time(9, 20),
+    ),
+    event(
+      title  = "Industrial Experience with the Migration of Legacy Models using a DSL",
+      people = ["Mathijs Schuts (Philips)", "Jozef Hooman (TNO-ESI and Radboud University Nijmegen)",
+                "Paul Tielemans (Philips)"],
+      start  = time(9, 20),
+      end    = time(10, 00),
     ),
   ],
 )
@@ -336,11 +352,25 @@ session(
   title  = "RWDSL'18: 3rd International Workshop on Real World Domain Specific Languages",
   link   = "https://sites.google.com/site/realworlddsl/",
   start  = time(10, 30),
-  end    = time(12, 00),
-  room   = 'Europa 6',
+  end    = time(11, 50),
   events = [
     event(
-      title  = "Session 2",
+      title  = 'Saiph: Towards a DSL for High-Performance Computational Fluid Dynamics.',
+      people = ['Sandra Macià (Barcelona Supercomputing Center, BSC)', 'Sergi Mateo (BSC)',
+                'Pedro J Martínez-Ferrer (BSC)', 'Vicenç Beltran (BSC)',
+                'Daniel Mira (BSC)', 'Eduard Ayguadé (BSC)'],
+      start  = time(10, 30),
+      end    = time(11, 10),
+    ),
+    event(
+      title  = 'CFDlang: High-level code generation for high-order methods in fluid dynamics',
+      people = ['Norman Rink (TU Dresden)', 'Immo Huismann (TU Dresden)',
+                'Adilla Susungi (MINES ParisTech, PSL Research University)',
+                'Jeronimo Castrillon (TU Dresden)', 'Jörg Stiller (TU Dresden)',
+                'Jochen Fröhlich (TU Dresden)',
+                'Claude Tadonki (MINES ParisTech, PSL Research University)'],
+      start  = time(10, 30),
+      end    = time(11, 50),
     ),
   ],
 )
@@ -349,11 +379,20 @@ session(
   title  = "RWDSL'18: 3rd International Workshop on Real World Domain Specific Languages",
   link   = "https://sites.google.com/site/realworlddsl/",
   start  = time(13, 30),
-  end    = time(15, 00),
-  room   = 'Europa 6',
+  end    = time(14, 50),
   events = [
     event(
-      title  = "Session 3",
+      title  = "dsmodels: A Little Language for Dynamical Systems",
+      people = ["Charles Stein (Trinity University)", "Seth Fogarty (Trinity University)"],
+      start  = time(13, 30),
+      end    = time(14, 10),
+    ),
+    event(
+      title  = "D'Artagnan: An Embedded DSL Framework for Distributed Embedded Systems",
+      people = ['Adrian Mizzi (University of Malta)', 'Joshua Ellul (University of Malta)',
+                'Gordon Pace (University of Malta)'],
+      start  = time(14, 10),
+      end    = time(14, 50),
     ),
   ],
 )
@@ -363,10 +402,28 @@ session(
   link   = "https://sites.google.com/site/realworlddsl/",
   start  = time(15, 30),
   end    = time(17, 00),
-  room   = 'Europa 6',
   events = [
     event(
-      title  = "Session 4",
+      title  = "Q#: Enabling Scalable Quantum Computing and Development with a High-level DSL",
+      people = ["Alan Geller (Microsoft)", "Krysta Svore (Microsoft)",
+                "Martin Roetteler (Microsoft)", "Mariia Mykhailova (Microsoft)",
+                "Christopher Granade (Microsoft)", "Vadym Kliuchnikov (Microsoft)",
+                "Bettina Heim (Microsoft)", "John Azariah (Microsoft)",
+                "Matthias Troyer (Microsoft)", "Andres Paz (Microsoft)"],
+      start  = time(15, 30),
+      end    = time(16, 10),
+    ),
+    event(
+      title  = "A Task-Based DSL for Microcomputers",
+      people = ['Pieter Koopman (Radboud University)', 'Mart Lubbers (Radboud University)',
+                'Rinus Plasmeijer (Radboud University)'],
+      start  = time(16, 10),
+      end    = time(16, 50),
+    ),
+    event(
+      title  = "Close",
+      start  = time(16, 50),
+      end    = time(17, 00),
     ),
   ],
 )
@@ -454,51 +511,104 @@ session(
 session(
   track  = CC_track_1,
   title  = "CC: International Conference on Compiler Construction Compiler Construction",
-  link   = "https://cc-conference.github.io/18/",
+  link   = "https://cc-conference.github.io/18/program/program/",
   start  = time(8, 30),
+  end    = time(8, 45),
+  room   = 'Europa 1',
+  events = [
+    event(title = "Opening",),
+  ],
+)
+
+session(
+  track  = CC_track_1,
+  title  = "CC Keynote",
+  link   = "https://cc-conference.github.io/18/program/",
+  start  = time(8, 45),
   end    = time(10, 00),
   room   = 'Europa 1',
   events = [
-    event(title = "Session 1",
+    event(
+      title  = 'Rethinking Compilers in the Rise of Machine Learning and AI',
+      people = ["Xipeng Shen (North Carolina State University, USA)"],
+      important_people = True,
     ),
   ],
 )
+
 session(
   track  = CC_track_1,
-  title  = "CC: International Conference on Compiler Construction Compiler Construction",
-  link   = "https://cc-conference.github.io/18/",
+  title  = "Session 1: Polyhedral Compilation",
+  link   = "https://cc-conference.github.io/18/program/",
   start  = time(10, 30),
   end    = time(12, 00),
   room   = 'Europa 1',
   events = [
     event(
-      title   = "Session 2",
+      title  = "Modeling the Conflicting Demands of Parallelism and Temporal/Spatial Locality in Affine Scheduling",
+      people = ["Oleksandr Zinenko, Sven Verdoolaege, Chandan Reddy, Jun Shirako, Tobias Grosser, Vivek Sarkar,",
+                "and Albert Cohen (Inria, France; ENS, France; KU Leuven, Belgium; Polly Labs, Belgium; Georgia Tech,",
+                "USA; ETH Zurich, Switzerland)"],
+    ),
+    event(
+      title  = "A Polyhedral Compilation Framework for Loops with Dynamic Data-Dependent Bounds",
+      people = "Jie Zhao, Michael Kruse, and Albert Cohen (Inria, France; ENS, France)",
+    ),
+    event(
+      title  = "Polyhedral Expression Propagation",
+      people = "Johannes Doerfert, Shrey Sharma, and Sebastian Hack (Saarland University, Germany)",
     ),
   ],
 )
+
 session(
   track  = CC_track_1,
-  title  = "CC: International Conference on Compiler Construction Compiler Construction",
-  link   = "https://cc-conference.github.io/18/",
+  title  = "Session 2: Data-Flow and Pointer/Alias Analysis",
+  link   = "https://cc-conference.github.io/18/program/",
   start  = time(13, 30),
   end    = time(15, 00),
   room   = 'Europa 1',
   events = [
     event(
-      title   = "Session 3",
+      title  = "Computing Partially Path-Sensitive MFP Solutions in Data Flow Analyses",
+      people = ["Komal Pathade and Uday P. Khedker (Tata Consultancy Services, India; IIT Bombay, India)"],
+    ),
+    event(
+      title  = "An Efficient Data Structure for Must-Alias Analysis",
+      people = ["George Kastrinis, George Balatsouras, Kostas Ferles, Nefeli Prokopaki-Kostopoulou,",
+                "and Yannis Smaragdakis (University of Athens, Greece; University of Texas at Austin, USA)",]
+    ),
+    event(
+      title  = "Parallel Sparse Flow-Sensitive Points-to Analysis",
+      people = "Jisheng Zhao, Michael G. Burke, and Vivek Sarkar (Rice University, USA)",
     ),
   ],
 )
+
 session(
   track  = CC_track_1,
-  title  = "CC: International Conference on Compiler Construction Compiler Construction",
-  link   = "https://cc-conference.github.io/18/",
+  title  = "Session 3: Code Generation and Optimisation",
+  link   = "https://cc-conference.github.io/18/program/",
   start  = time(15, 30),
   end    = time(17, 00),
   room   = 'Europa 1',
   events = [
     event(
-      title   = "Session 4",
+      title  = "PAYJIT: Space-Optimal JIT Compilation and Its Practical Implementation",
+      people = ["Jacob Brock, Chen Ding, Xiaoran Xu, and Yan Zhang (University of Rochester,",
+                "USA; Rice University, USA; Futurewei Technologies, USA)"],
+    ),
+    event(
+      title  = "Finding Missed Compiler Optimizations by Differential Testing",
+      people = ["Gergö Barany (Inria, France)"],
+    ),
+    event(
+      title  = "Fast and Flexible Instruction Selection with Constraints",
+      people = ["Patrick Thier, M. Anton Ertl, and Andreas Krall (Vienna University of Technology, Austria)"],
+    ),
+    event(
+      title  = "",
+      people = [""],
     ),
   ],
 )
@@ -540,40 +650,126 @@ session(
   end    = time(10, 00),
   room   = 'Europa 5',
   events = [
-    event(title = "Session 1"),
-  ],
+    event(title = "Welcome and Introduction Pradip Bose"),
+    event(
+      title  = 'Keynote I: TBD',
+      people = ['Mikko H. Lipasti (MICRO 2017 Test of Time Award, University of Wisconsin - Madison)'],
+      important_people = True,
+    ),
+  ]
 )
 session(
   track  = HPCA_track_1,
-  title  = "WP3: Second Workshop on Pioneering Processor Paradigms",
-  link   = 'http://wp3workshop.website/',
+  title  = "WP3: Retrospective Survey I",
+  start  = time(9, 40),
+  end    = time(10, 00),
+  room   = 'Europa 5',
+  events = [
+    event(
+      title  = 'On the Evaluation of Computer Architectures',
+      people = ['Mario Badr and Natalie Enright Jerger (University of Toronto)'],
+    ),
+  ],
+)
+
+session(
+  track  = HPCA_track_1,
+  title  = "WP3: Invited Talk",
   start  = time(10, 30),
+  end    = time(11, 20),
+  room   = 'Europa 5',
+  events = [
+    event(
+      title  = '40 years since dusk: will hardware capabilities finally make our systems more capable?',
+      people = ['Lluis Vilanova (Technion)'],
+      important_people = True,
+    ),
+  ],
+)
+session(
+  track  = HPCA_track_1,
+  title  = "WP3: New/Exploratory paradigms",
+  start  = time(11, 20),
   end    = time(12, 00),
-  room   = 'Europa 5',
   events = [
-    event(title = "Session 2"),
-  ],
+    event(
+      title  = "A Multi-component Branch Predictor Design for Low Resource Budget Processors",
+      people = ['Moumita Das, Ansuman Banerjee and Bhaskar Sardar (Indian Statistical Institute and Jadavpur University)'],
+    ),
+    event(
+      title  = 'FFT implementation using mono-instruction set computer architecture',
+      people = ['Hiroki Shinba and Minoru Watanabe (Shizuoka University)'],
+    ),
+  ]
 )
+
 session(
   track  = HPCA_track_1,
   title  = "WP3: Second Workshop on Pioneering Processor Paradigms",
   link   = 'http://wp3workshop.website/',
-  start  = time(13, 30),
+  start  = time(13, 20),
+  end    = time(14, 20),
+  events = [
+    event(
+      title  = 'Keynote II: TBD',
+      people = ['TBD'],
+      important_people = True,
+    ),
+  ],
+)
+session(
+  track  = HPCA_track_1,
+  title  = "WP3: Restrospective Survey II",
+  start  = time(14, 20),
   end    = time(15, 00),
-  room   = 'Europa 5',
   events = [
-    event(title = "Session 3"),
+    event(
+      title  = 'This Architecture Tastes Like Microarchitecture',
+      people = ['Curtis Dunham and Jonathan Beard (ARM Research)'],
+    ),
+    event(
+      title  = 'Project CrayOn: Back to the future for a more General-Purpose GPU?',
+      people = ['Philip Machanick (Rhodes University)'],
+    ),
+  ],
+)
+
+session(
+  track  = HPCA_track_1,
+  title  = "WP3: Restrospective Survey III",
+  start  = time(15, 30),
+  end    = time(15, 50),
+  events = [
+    event(
+      title  = '45-year CPU evolution: one law and two equations',
+      people = ['Curtis Dunham and Jonathan Beard (ARM Research)'],
+    ),
+  ],
+)
+
+session(
+  track  = HPCA_track_1,
+  title  = "WP3: Panel Session",
+  start  = time(15, 30),
+  end    = time(15, 50),
+  events = [
+    event(
+      title  = 'Panel TBD',
+      people = ['Invited Pioneers and speakers plus the retrospective paper authors'],
+      important_people = True,
+    ),
   ],
 )
 session(
   track  = HPCA_track_1,
-  title  = "WP3: Second Workshop on Pioneering Processor Paradigms",
-  link   = 'http://wp3workshop.website/',
+  title  = "WP3: Recap/discussion; clossing remarks, action items",
   start  = time(15, 30),
-  end    = time(17, 00),
-  room   = 'Europa 5',
+  end    = time(15, 50),
   events = [
-    event(title = "Session 4"),
+    event(
+      title  = 'Discussion driven by workshop organizers.',
+      people = ['Invited Pioneers and speakers plus the retrospective paper authors'],
+    ),
   ],
 )
 
@@ -678,7 +874,8 @@ session(
   room   = 'Pacific 2',
   events = [
     event(
-      title = "[Session 2] Guided exercises so that the audience uses rCUDA in a cluster located at Technical University of Valencia, Spain",
+      title = "[Session 2] Guided exercises so that the audience uses rCUDA in a "
+              "cluster located at Technical University of Valencia, Spain",
     ),
     event(
       title = "Time for attendees to freely exercise with rCUDA in the remote cluster (a set of exercises is proposed)",
@@ -784,18 +981,52 @@ session(
   end    = time(10, 00),
   room   = 'Europa 2',
   events = [
-    event(title = "Session 1",),
+    event(
+      title  = 'Welcome: The Organizers',
+    ),
+    event(
+      title  = 'Keynote 1: "Initial Steps toward Making GPU a First-Class Computing Resource: Sharing and Resource Management"',
+      people = ['Jun Yang (William Kepler Whiteford Professor of Electrical and Computer Engineering, University of Pittsburgh)',],
+      important_people = True,
+    ),
   ],
 )
 session(
   track  = PPoPP_track_2,
-  title  = "GPGPU: Workshop on General Purpose Processing Using GPU",
-  link   = "https://gpgpu11.000webhostapp.com/",
+  title  = "GPGPU Session 1: Persistent Data Structures",
+  start  = time(9, 30),
+  end    = time(10, 00),
+  room   = 'Europa 2',
+  events = [
+    event(
+      title  = "A Case For Persist Barriers in GPUs",
+      people = ['Dibakar Gope, Arkaprava Basu, Sooraj Puthoor',
+                "and Mitesh Meswani (ARM Research and AMD Research)"],
+    ),
+  ],
+)
+
+session(
+  track  = PPoPP_track_2,
+  title  = "GPGPU Session 2: Applications/Frameworks",
   start  = time(10, 30),
   end    = time(12, 00),
   room   = 'Europa 2',
   events = [
-    event(title = "Session 2",),
+    event(
+      title  = "Overcoming the Difficulty of Large-scale CGH Generation on multi-GPU Cluster",
+      people = ['Takanobu Baba, Shinpei Watanabe, Boaz Jessie Jackin, Takeshi Ohkawa',
+                'Kanemitsu Ootsu, Takashi Yokota, Yoshio Hayasaki,'
+                'Toyohiko Yatagai (Utsunomiya University and National Institute of Information and Communications Technology)'],
+    ),
+    event(
+      title  = "Transparent Avoidance of Redundant Data Transfer on GPU-enabled Apache Spark",
+      people = ['Ryo Asai, Masao Okita, Fumihiko Ino and Kenichi Hagihara (Osaka University)']
+    ),
+    event(
+      title  = "GPU-based Acceleration of Detailed Tissue-Scale Cardiac Simulations",
+      people = ['Neringa Altanaite and Johannes Langguth (Simula Research Laboratory, Norway)']
+    ),
   ],
 )
 session(
@@ -803,21 +1034,29 @@ session(
   title  = "GPGPU: Workshop on General Purpose Processing Using GPU",
   link   = "https://gpgpu11.000webhostapp.com/",
   start  = time(13, 30),
-  end    = time(15, 00),
+  end    = time(14, 30),
   room   = 'Europa 2',
   events = [
-    event(title = "Session 3",),
+    event(
+      title  = 'Keynote 2: "Generating High Performance GPU Code using Rewrite Rules with Lift"',
+      people = ['Christophe Dubach (University of Edinburgh)'],
+      important_people = True,
+    ),
   ],
 )
+
 session(
   track  = PPoPP_track_2,
-  title  = "GPGPU: Workshop on General Purpose Processing Using GPU",
-  link   = "https://gpgpu11.000webhostapp.com/",
+  title  = "GPGPU Session 3: Concurrent Kernels",
   start  = time(15, 30),
-  end    = time(17, 00),
+  end    = time(16, 30),
   room   = 'Europa 2',
   events = [
-    event(title = "Session 4",),
+    event(
+      title  = "MaxPair: Enhance OpenCL Concurrent Kernel Execution by Weighted Maximum Matching",
+      people = ['Yuan Wen, Michael O’Boyle',
+                'Christian Fensch (Trinity College Dublin, University of Edinburgh, Heriot-Watt University)'],
+    ),
   ],
 )
 
@@ -967,46 +1206,90 @@ session(
 
 session(
   track  = CC_track_1,
-  title  = "CC: International Conference on Compiler Construction Compiler Construction",
-  link   = "https://cc-conference.github.io/18/",
-  start  = time(8, 30),
+  title  = "CC Keynote",
+  link   = "https://cc-conference.github.io/18/program/",
+  start  = time(8, 45),
   end    = time(10, 00),
   room   = 'Europa 1',
   events = [
-    event(title = "Session 5"),
+    event(
+      title  = "Compiler and Language Design for Quantum Computing",
+      people = ['Bettina Heim (Microsoft Research, USA)'],
+      important_people = True,
+    ),
   ],
 )
+
 session(
   track  = CC_track_1,
-  title  = "CC: International Conference on Compiler Construction Compiler Construction",
-  link   = "https://cc-conference.github.io/18/",
+  title  = "Session 4: Compilation for Specialised Domains",
+  link   = "https://cc-conference.github.io/18/program/",
   start  = time(10, 30),
-  end    = time(12, 00),
+  end    = time(13, 00),
   room   = 'Europa 1',
   events = [
-    event(title = "Session 6"),
+    event(
+      title  = "Compiling for Concise Code and Efficient I/O",
+      people = ['Sebastian Ertel, Andrés Goens, Justus Adam, and Jeronimo Castrillon (TU Dresden, Germany)'],
+    ),
+    event(
+      title  = "Termination Checking and Task Decomposition for Task-Based Intermittent Programs",
+      people = ['Alexei Colin and Brandon Lucia (Carnegie Mellon University, USA)'],
+    ),
+    event(
+      title  = "A Session Type Provider: Compile-Time API Generation of Distributed Protocols with Refinements in F#",
+      people = ['Rumyana Neykova, Raymond Hu, Nobuko Yoshida, and Fahd Abdeljallal (Imperial College London, UK)'],
+    ),
   ],
 )
+
 session(
   track  = CC_track_1,
-  title  = "CC: International Conference on Compiler Construction Compiler Construction",
-  link   = "https://cc-conference.github.io/18/",
+  title  = "Session 5: Code Translation and Transformation",
+  link   = "https://cc-conference.github.io/18/program/",
   start  = time(13, 30),
   end    = time(15, 00),
   room   = 'Europa 1',
   events = [
-    event(title = "Session 7"),
+    event(
+      title  = "Tail Call Elimination and Data Representation for Functional Languages on the Java Virtual Machine",
+      people = ['Magnus Madsen, Ramin Zarifi,',
+                'and Ondřej Lhoták (Aalborg University, Denmark; University of Waterloo, Canada)'],
+    ),
+    event(
+      title  = "CAnDL: A Domain Specific Language for Compiler Analysis",
+      people = ["Philip Ginsbach, Lewis Crawford, and Michael F. P. O'Boyle (University of Edinburgh, UK)"],
+    ),
+    event(
+      title  = "Semantic Reasoning about the Sea of Nodes",
+      people = ['Delphine Demange, Yon Fernández de Retana,',
+                'and David Pichardie (Univ Rennes, France; Inria, France; CNRS, France; IRISA, France)'],
+    ),
   ],
 )
+
 session(
   track  = CC_track_1,
-  title  = "CC: International Conference on Compiler Construction Compiler Construction",
-  link   = "https://cc-conference.github.io/18/",
+  title  = "Session 6: Compile- and Run-Time Analysis",
+  link   = "https://cc-conference.github.io/18/program/",
   start  = time(15, 30),
   end    = time(17, 00),
   room   = 'Europa 1',
   events = [
-    event(title = "Session 8"),
+    event(
+      title  = "Towards a Compiler Analysis for Parallel Algorithmic Skeletons",
+      people = ["Tobias J. K. Edler von Koch, Stanislav Manilov, Christos Vasiladiotis,",
+                "Murray Cole, and Björn Franke (Qualcomm Innovation Center, USA; University of Edinburgh, UK)"],
+    ),
+    event(
+      title  = "Generalized Profile-Guided Iterator Recognition",
+      people = ["Stanislav Manilov, Christos Vasiladiotis, and Björn Franke (University of Edinburgh, UK)"],
+    ),
+    event(
+      title  = "Efficient Dynamic Analysis for Node.js",
+      people = ['Haiyang Sun, Daniele Bonetta, Christian Humer,',
+                'and Walter Binder (University of Lugano, Switzerland; Oracle Labs, USA; Oracle Labs, Switzerland)'],
+    ),
   ],
 )
 
@@ -1031,6 +1314,7 @@ joint_event(
   start  = time(8, 45), end = time(9, 55),
   room   = 'Europa 4',
   people = ["Margaret Martonosi (Princeton University)"],
+  important_people = True,
 )
 joint_event(
   title = 'Coffee Break',
@@ -1055,8 +1339,8 @@ session(
   title = 'Best Paper Session',
   start = time(10, 20),
   end   = time(12, 00),
-  room   = 'Europa 4',
-  # chair = ,
+  room  = 'Europa 4',
+  chair = "Josep Torrellas (UIUC)",
   events = [
     event(
       title  = "Amdahl's Law in the Datacenter Era: A Market for Fair Processor Allocation",
@@ -1084,8 +1368,8 @@ session(
   title = 'Session 2A: Architecture for Neural Network',
   start = time(13, 15),
   end   = time(14, 55),
-  room   = 'Europa 4',
-  # chair = ,
+  room  = 'Europa 4',
+  chair = "Rajeev Balasubramonian (University of Utah)",
   events = [
     event(
       title  = "Making Memristive Neural Network Accelerators Reliable",
@@ -1117,8 +1401,8 @@ session(
   title = 'Session 2B: Cache and Memory',
   start = time(13, 15),
   end   = time(14, 55),
-  room   = 'Europa 5+6',
-  # chair = ,
+  room  = 'Europa 5+6',
+  chair = "Paul V. Gratz (Texas A&M University)",
   events = [
     event(
       title  = "A Hybrid Cache Partitioning-Sharing Technique for Commodity Multicores",
@@ -1152,6 +1436,7 @@ session(
   start  = time(15, 15),
   end    = time(16, 55),
   room   = 'Europa 4',
+  chair  = "David R. Kaeli (Northeastern University)",
   events = [
     event(
       title  = "RCoal: Mitigating GPU Timing Attack via Subwarp-based Randomized Coalescing Techniques",
@@ -1182,6 +1467,7 @@ session(
   start  = time(15, 15),
   end    = time(16, 55),
   room   = 'Europa 5+6',
+  chair  = "Bradford M. Beckmann (AMD)",
   events = [
     event(
       title  = "Accelerate GPU Concurrent Kernel Execution by Mitigating Memory Pipeline Stalls",
@@ -1213,6 +1499,7 @@ session(
   start  = time(17, 15),
   end    = time(18, 55),
   room   = 'Europa 4',
+  chair  = "Benjamin Lee (Duke University)",
   events = [
     event(
       title  = "A Novel Register Renaming Technique for Out-of-Order Processors",
@@ -1242,6 +1529,7 @@ session(
   start  = time(17, 15),
   end    = time(18, 55),
   room   = 'Europa 5+6',
+  chair  = "Hai Li (Duke University)",
   events = [
     event(
       title  = "Crash Consistency in Encrypted Non-Volatile Main Memory Systems",
@@ -1345,8 +1633,9 @@ session(
   track  = PPoPP_track_1,
   title  = "Session 1: Concurrent Data Structures",
   start  = time(10, 20),
-  end    = time(11, 45),
+  end    = time(11, 35),
   room   = 'Europa 3',
+  chair  = 'Xipeng Shen (North Carolina State University)',
   events = [
     event(
       title  = "Interval-Based Memory Reclamation",
@@ -1383,6 +1672,7 @@ session(
   start  = time(13, 15),
   end    = time(14, 55),
   room   = 'Europa 3',
+  chair  = 'I-Ting Angelina Lee (Washington University in St. Louis)',
   events = [
     event(
       title  = "SuperNeurons: Dynamic GPU Memory Management for Training Deep Neural Networks",
@@ -1435,8 +1725,9 @@ session(
   track  = PPoPP_track_1,
   title  = "Session 3: Performance",
   start  = time(15, 15),
-  end    = time(16, 55),
+  end    = time(16, 30),
   room   = 'Europa 3',
+  chair  = 'Milind Chabbi (Baidu Research)',
   events = [
     event(
       title  = "Bridging the Gap between Deep Learning and Sparse Matrix Format Selection",
@@ -1472,24 +1763,24 @@ session(
 
 session(
   track  = CGO_track_1,
-  title  = 'Artifact Evaluation',
+  title  = 'CGO & PPoPP Artifact Evaluation',
   start  = time(17, 15),
   end    = time(17, 45),
-  room   = 'Europa 4',
+  room   = 'Europa 3',
   events = [
-    event(title = 'CGO Artifact Evaluation')
+    event(title = 'CGO & PPoPP Artifact Evaluation')
   ],
 )
 
 
 session(
   track  = PPoPP_track_1,
-  title  = 'Artifact Evaluation',
+  title  = 'CGO & PPoPP Artifact Evaluation',
   start  = time(17, 15),
   end    = time(17, 45),
   room   = 'Europa 3',
   events = [
-    event(title = 'PPoPP Artifact Evaluation')
+    event(title = 'CGO & PPoPP Artifact Evaluation')
   ],
 )
 
@@ -1557,6 +1848,7 @@ joint_event(
   start  = time(13, 15), end = time(14, 25),
   room  = 'Europa 4',
   people = ["Sara-Jane Dunn (Microsoft Research Limited)"],
+  important_people = True,
 )
 joint_event(
   title = 'Coffee Break',
@@ -1578,7 +1870,8 @@ session(
   title  = "Session 5A: GPU",
   start  = time(8, 0),
   end    = time(9, 40),
-  room  = 'Europa 4',
+  room   = 'Europa 4',
+  chair  = "Minsoo Rhu (POSTECH)",
   events = [
     event(
       title  = "Perception-Oriented 3D Rendering Approximation for Modern Graphics Processors",
@@ -1605,7 +1898,8 @@ session(
   title  = "Session 5B: Secure memory",
   start  = time(8, 0),
   end    = time(9, 40),
-  room  = 'Europa 5+6',
+  room   = 'Europa 5+6',
+  chair  = "Rui Hou (Chinese Academy of Science)",
   events = [
     event(
       title  = "D-ORAM: Path-ORAM Delegation for Low Execution Interference on Cloud Servers with Untrusted Memory",
@@ -1635,7 +1929,8 @@ session(
   title  = "Session 6A: Novel Architecture",
   start  = time(10, 5),
   end    = time(11, 45),
-  room  = 'Europa 4',
+  room   = 'Europa 4',
+  chair  = "Kei Hiraki (University of Tokyo)",
   events = [
     event(
       title  = "A Case for Packageless Processors",
@@ -1667,7 +1962,8 @@ session(
   title  = "Session 6B: In-Memory Computing",
   start  = time(10, 5),
   end    = time(11, 45),
-  room  = 'Europa 5+6',
+  room   = 'Europa 5+6',
+  chair  = "Jishen Zhao (UCSD)",
   events = [
     event(
       title  = "RC-NVM: Enabling Symmetric Row and Column Memory Accesses for In-Memory Databases",
@@ -1699,7 +1995,8 @@ session(
   title  = "Session 7A: Industry Track",
   start  = time(14, 50),
   end    = time(16, 30),
-  room  = 'Europa 4',
+  room   = 'Europa 4',
+  chair  = "Lieven Eeckhout (Ghent University)",
   events = [
     event(
       title  = "Don't Correct the Tags in a Cache, just Check their Hamming Distance from the Lookup Tag",
@@ -1731,7 +2028,8 @@ session(
   title  = "Session 7B: Best of CAL",
   start  = time(14, 50),
   end    = time(16, 30),
-  room  = 'Europa 5+6',
+  room   = 'Europa 5+6',
+  chair  = "Dan Sorin (Duke University)",
   events = [
     event(
       title  = "Resistive Address Decoder",
@@ -1755,7 +2053,7 @@ session(
   title  = "Session 4: Linear Algebra and Vectorization",
   start  = time(8, 0),
   end    = time(9, 40),
-  room  = 'Europa 2',
+  room   = 'Europa 2',
   events = [
     event(
       title  = "The Generalized Matrix Chain Algorithm",
@@ -1783,7 +2081,7 @@ session(
   title  = "Session 5: Static and Dynamic Analysis",
   start  = time(10, 5),
   end    = time(11, 45),
-  room  = 'Europa 2',
+  room   = 'Europa 2',
   events = [
     event(
       title  = "Scalable Concurrency Debugging with Distributed Graph Processing",
@@ -1813,7 +2111,7 @@ session(
   title  = "Session 6: Memory usage Optimisation",
   start  = time(14, 50),
   end    = time(16, 30),
-  room  = 'Europa 2',
+  room   = 'Europa 2',
   events = [
     event(
       title  = "DeLICM: Scalar Dependence Removal at Zero Memory Cost",
@@ -1842,6 +2140,7 @@ session(
   start  = time(8, 00),
   end    = time(9, 40),
   room   = 'Europa 3',
+  chair  = 'Idit Keidar (Technion)',
   events = [
     event(
       title  = "Cache-Tries: Concurrent Lock-Free Hash Tries with Constant-Time Operations",
@@ -1885,6 +2184,7 @@ session(
   start  = time(10, 5),
   end    = time(11, 45),
   room   = 'Europa 3',
+  chair  = 'Walter Binder (USI)',
   events = [
     event(
       title  = "DisCVar: Discovering Critical Variables Using Algorithmic Differentiation for Transient Faults",
@@ -1929,6 +2229,7 @@ session(
   start  = time(14, 50),
   end    = time(16, 30),
   room   = 'Europa 3',
+  chair  = 'Zoltan Majo (Ergon Informatik AG)',
   events = [
     event(
       title  = "Making Pull-Based Graph Processing Performant",
@@ -1980,6 +2281,7 @@ joint_event(
   start  = time(8, 0), end = time(9, 0),
   people = ["Peter Sewell (University of Cambridge)"],
   room  = 'Europa 4',
+  important_people = True,
 )
 joint_event(
   title = 'Coffee Break',
@@ -1995,7 +2297,8 @@ session(
   title  = "Session 8A: Industry Track (applications)",
   start  = time(9, 25),
   end    = time(11, 5),
-  room  = 'Europa 4',
+  room   = 'Europa 4',
+  chair  = "Andrew Putnam (Microsoft)",
   events = [
     event(
       title  = "Applied Machine Learning at Facebook: A Datacenter Infrastructure Perspective",
@@ -2025,10 +2328,12 @@ session(
   title  = "Session 8B: Memory",
   start  = time(9, 25),
   end    = time(11, 5),
-  room  = 'Europa 5+6',
+  room   = 'Europa 5+6',
+  chair  = "Guangyu Sun (Peking University)",
   events = [
     event(
-      title  = "ERUCA: Efficient DRAM Resource Utilization and Resource Conflict Avoidance for Memory System Parallelism",
+      title  = "ERUCA: Efficient DRAM Resource Utilization and Resource Conflict "
+               "Avoidance for Memory System Parallelism",
       people = ["Sangkug Lym (University of Texas at Austin), Heonjae Ha (Standford University)",
                 "Yongkee Kwon (University of Texas at Austin), Chunkai Chang (University of Texas at Austin)",
                 "Jungrae Kim (Microsoft)", "Mattan Erez (University of Texas at Austin)"]
@@ -2056,7 +2361,8 @@ session(
   title  = "Session 9A: Accelerators",
   start  = time(11, 20),
   end    = time(12, 35),
-  room  = 'Europa 4',
+  room   = 'Europa 4',
+  chair  = "Xuehai Qian (USC)",
   events = [
     event(
       title  = "OuterSPACE: An Outer product based SPArse matrix multiplication acCElerator",
@@ -2067,11 +2373,13 @@ session(
                 "Ronald Dreslinski (University of Michigan, Ann Arbor)"]
     ),
     event(
-      title  = "Searching for Potential gRNA Off-Target Sites for CRISPR/Cas9 using Automata Processing across Different Platforms",
+      title  = "Searching for Potential gRNA Off-Target Sites for "
+               "CRISPR/Cas9 using Automata Processing across Different Platforms",
       people = ["Chunkun Bo, Vinh Dang, Elaheh Sadredini, Kevin Skadron (University of Virginia)"]
     ),
     event(
-      title  = "Characterizing and Mitigating Output Reporting Bottlenecks in Spatial-Reconfigurable Automata Processing Architectures",
+      title  = "Characterizing and Mitigating Output Reporting Bottlenecks "
+               "in Spatial-Reconfigurable Automata Processing Architectures",
       people = ["Jack Wadden, Kevin Angstadt, Kevin Skadron (University of Virginia)"]
     ),
   ],
@@ -2082,7 +2390,8 @@ session(
   title  = "Session 9B: Power",
   start  = time(11, 20),
   end    = time(12, 35),
-  room  = 'Europa 5+6',
+  room   = 'Europa 5+6',
+  chair  = "Guru Venkataramani (George Washington University)",
   events = [
     event(
       title  = "Power and Energy Characterization of an Open Source 25-core Manycore Processor",
@@ -2161,6 +2470,7 @@ session(
   start  = time(9, 25),
   end    = time(11, 5),
   room   = 'Europa 3',
+  chair  = "Bernhard Egger (Seoul National University)",
   events = [
     event(
       title  = "Efficient Shuffle Management with SCache for DAG Computing Frameworks",
@@ -2205,6 +2515,7 @@ session(
   start  = time(11, 20),
   end    = time(12, 10),
   room   = 'Europa 3',
+  chair  = "Jesper Larsson Träff (TU Wien)",
   events = [
     event(
       title  = "VerifiedFT: A Verified, High-Performance Dynamic Race Detector",
@@ -2293,6 +2604,20 @@ if __name__ == '__main__':
   h.print_day(wednesday, show_people=args.show_people, time_column=True)
 
   h.print_program_footer()
+
+  ## why is it so hard to center stuff in HTML?
+  ## The instructions from w3schools does not work
+  ## (they don't even use it themselves in their example image 🤣)
+  h.page_break()
+  h.print_header('Venue Floor Plan')
+  h._writer.open('div', style='width: 100%')
+  h.tag(
+    'img',
+    style='display: block; margin: 0 auto; width: 90%',
+    src="https://ppopp18.sigplan.org/getImage/orig/Gesamtplan_EWP.png",
+    alt="Venue Floor Plan",
+  )
+  h._writer.close('div')
 
   if args.full_page:
     h.print_page_footer()
