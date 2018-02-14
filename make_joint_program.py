@@ -37,7 +37,13 @@ TUESDAY   = datetime.date(2018, 2, 27)
 WEDNESDAY = datetime.date(2018, 2, 28)
 
 
-def day_time(day: datetime.date):
+def day_time(day: datetime.date) -> Callable[[int, int], datetime.datetime]:
+  """
+    returns a factory for datetime objects.
+    The returned callable takes hour and minute (as int) and returns a
+    datetime at *day*
+  """
+
   def time(hour, minute):
     return datetime.datetime(day.year, day.month, day.day, hour, minute)
 
@@ -1428,11 +1434,24 @@ joint_event(
   start = time(16, 55), end = time(17, 15),
 )
 
+session(
+  track  = HPCA_track_1,
+  title  = 'Test of Time Award Session',
+  start  = time(10, 20),
+  end    = time(10, 30),
+  room   = 'Europa 4',
+  events = [
+    event(
+      title = 'HPCA Test of Time Award',
+      link  = 'http://ieeetcca.org/awards/hpca-test-of-time-award/',
+    ),
+  ],
+)
 
 session(
   track = HPCA_track_1,
   title = 'Best Paper Session',
-  start = time(10, 20),
+  start = time(10, 30),
   end   = time(12, 00),
   room  = 'Europa 4',
   chair = "Josep Torrellas (UIUC)",
