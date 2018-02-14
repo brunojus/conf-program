@@ -332,6 +332,7 @@ session(
   link   = "https://sites.google.com/site/realworlddsl/",
   start  = time(9, 15),
   end    = time(10, 00),
+  room   = 'Europa 6',
   events = [
     event(
       title  = "Welcome",
@@ -353,6 +354,7 @@ session(
   link   = "https://sites.google.com/site/realworlddsl/",
   start  = time(10, 30),
   end    = time(11, 50),
+  room   = 'Europa 6',
   events = [
     event(
       title  = 'Saiph: Towards a DSL for High-Performance Computational Fluid Dynamics.',
@@ -380,6 +382,7 @@ session(
   link   = "https://sites.google.com/site/realworlddsl/",
   start  = time(13, 30),
   end    = time(14, 50),
+  room   = 'Europa 6',
   events = [
     event(
       title  = "dsmodels: A Little Language for Dynamical Systems",
@@ -402,6 +405,7 @@ session(
   link   = "https://sites.google.com/site/realworlddsl/",
   start  = time(15, 30),
   end    = time(17, 00),
+  room   = 'Europa 6',
   events = [
     event(
       title  = "Q#: Enabling Scalable Quantum Computing and Development with a High-level DSL",
@@ -511,7 +515,7 @@ session(
 session(
   track  = CC_track_1,
   title  = "CC: International Conference on Compiler Construction Compiler Construction",
-  link   = "https://cc-conference.github.io/18/program/program/",
+  link   = "https://cc-conference.github.io/18/program/",
   start  = time(8, 30),
   end    = time(8, 45),
   room   = 'Europa 1',
@@ -936,42 +940,133 @@ session(
   end    = time(10, 00),
   room   = 'Europa 3',
   events = [
-    event(title = "Session 1",),
+    event(
+      title  = "Opening Remarks",
+      start  = time(8, 30),
+      end    = time(8, 40),
+      people = ['Quan Chen', 'Zhiyi Huang', 'Pavan Balaji'],
+    ),
+    event(
+      title  = 'Keynote: "Building the next Generation of MapReduce Programming Models '
+               'over MPI to Fill the Gaps between Data Analytics and Supercomputers"',
+      start  = time(8, 40),
+      end    = time(10, 00),
+      people = ['Prof. Michela Taufer (University of Delaware, USA)'],
+#     abstract = '''
+#       MapReduce (MR) has become has become the dominant programming model for analyzing large volumes of data.
+#       Most implementations of the MR model were initially designed for Cloud and commodity clusters.
+#       When moved to supercomputers these implementations often exhibit their inability to cope with features that are
+#       common in Cloud but missing in HPC (e.g., on-node persistent storage) or to leverage features that are common
+#       in HPC but missing in Cloud (e.g., fast interconnects).
+#       In this talk I will discuss how the model can be redesigned to incorporate optimization techniques tackling
+#       some of the supercomputing challenges listed above. I will present Mimir, an MR implementation over MPI that
+#       bridges the gap between data analytics and supercomputing by enabling the in-memory analysis of significantly
+#       larger datasets on HPC platforms without sacrificing the ease-of-use MR provides. I will show how fundamental
+#       operations in DNA research and genome analytics such as K-mer counting can be executed on unprecedentedly large
+#       genomics datasets (up to 24 TB) and how they can achieve large performance gains on supercomputers when executed
+#       on top of Mimir.
+#     '''
+#     bio = '''
+#       Michela Taufer is a Professor in Computer and Information Sciences and a J.P. Morgan Case Scholar at the
+#       University of Delaware; she has a joint appointment in the Biomedical Department and the Bioinformatics
+#       Program at the same university. She earned her undergraduate degrees in Computer Engineering from the
+#       University of Padova (Italy) and her doctoral degree in Computer Science from the Swiss Federal Institute of
+#       Technology or ETH (Switzerland).  From 2003 to 2004 she was a La Jolla Interfaces in Science Training
+#       Program (LJIS) Postdoctoral Fellow at the University of California San Diego (UCSD) and The Scripps Research
+#       Institute (TSRI), where she worked on interdisciplinary projects in computer systems
+#       and computational chemistry.
+#       Taufer’s research interests include scientific applications, multi-scale applications, numerical
+#       reproducibility, and big data analytics.  She has nearly 100 publications and delivered nearly 80 talks at
+#       various conferences and research institutes. She is currently serving on the NSF Advisory Committee for
+#       Cyberinfrastructures (ACCI). She is a professional member of the IEEE and a distinguished scientist of the ACM.
+#     '''
+    ),
   ],
 )
+
 session(
   track  = PPoPP_track_1,
-  title  = "PMAM: Workshop on Programming Models and Applications for Multicores and Manycores",
-  link   = "https://ppopp18.sigplan.org/track/pmam-2018",
+  title  = "PMAM Session 1: GPU and Accelerator",
   start  = time(10, 30),
   end    = time(12, 00),
   room   = 'Europa 3',
   events = [
-    event(title = "Session 2",),
+    event(
+      title  = 'Extending ILUPACK with a Task-Parallel Version of BiCG for Dual-GPU Servers',
+      people = ['José I. Aliaga', 'Matthias Bollhöfer', 'Ernesto Dufrechou',
+                'Pablo Ezzatti', 'Enrique S. Quintana-Ortí']
+    ),
+    event(
+      title  = 'Reduction to Band Form for the Singular Value Decomposition on Graphics Accelerators',
+      people = ['Andrés E. Tomás', 'Rafael Rodríguez-Sánchez', 'Sandra Catalán', 'Enrique S. Quintana-Ortí']
+    ),
+    event(
+      title  = 'Combining PREM compilation and ILP scheduling for high-performance and predictable MPSoC execution',
+      people = ['Joel Matějka', 'Björn Forsberg', 'Michal Sojka', 'Zdeněk Hanzálek',
+                'Luca Benini', 'Andrea Marongiu']
+    ),
   ],
 )
+
 session(
   track  = PPoPP_track_1,
-  title  = "PMAM: Workshop on Programming Models and Applications for Multicores and Manycores",
-  link   = "https://ppopp18.sigplan.org/track/pmam-2018",
+  title  = "PMAM Session 2: Fine-grain Parallelism",
   start  = time(13, 30),
   end    = time(15, 00),
   room   = 'Europa 3',
   events = [
-    event(title = "Session 3",),
+    event(
+      title  = 'Fast and Accurate Performance Analysis of Synchronization',
+      people = ['Mario Badr', 'Natalie Enright Jerger']
+    ),
+    event(
+      title  = 'Supporting Fine-grained Dataflow Parallelism in Big Data Systems',
+      people = ['Sebastian Ertel', 'Justus Adam', 'Jeronimo Castrillon']
+    ),
+    event(
+      title  = 'Intra-Task Parallelism in Automotive Real-Time Systems',
+      people = ['Remko van Wagensveld', 'Tobias Wägemann', 'Niklas Hehenkamp', 'Ramin Tavakoli Kolagari',
+                'Ulrich Margull', 'Ralph Mader']
+    ),
   ],
 )
+
 session(
   track  = PPoPP_track_1,
-  title  = "PMAM: Workshop on Programming Models and Applications for Multicores and Manycores",
-  link   = "https://ppopp18.sigplan.org/track/pmam-2018",
+  title  = "PMAM Session 3: Cache and Pipeline",
   start  = time(15, 30),
   end    = time(17, 00),
   room   = 'Europa 3',
   events = [
-    event(title = "Session 4",),
+    event(
+      title  = 'Understanding Parallelization Tradeoffs for Linear Pipelines',
+      people = ['Aristeidis Mastoras, Thomas R. Gross']
+    ),
+    event(
+      title  = 'An Evaluation of Vectorization and Cache Reuse Tradeoffs on Modern CPUs',
+      people = ['Du Shen, Milind Chabbi', 'Xu Liu']
+    ),
+    event(
+      title  = 'VAIL: A Victim-Aware Cache Policy for Improving Lifetime of Hybrid Memory',
+      people = ['Youchuang Jia', 'Fang Zhou', 'Xiang Gao', 'Song Wu', 'Hai Jin',
+                'Xiaofei Liao', 'Pingpeng Yuan']
+    ),
   ],
 )
+
+session(
+  track  = PPoPP_track_1,
+  start  = time(17, 0),
+  end    = time(17, 5),
+  room   = 'Europa 3',
+  events = [
+    event(
+      title  = 'Closing Remarks',
+      people = ['Quan Chen', 'Zhiyi Huang', 'Pavan Balaji'],
+    ),
+  ],
+)
+
 
 session(
   track  = PPoPP_track_2,
@@ -1790,6 +1885,7 @@ joint_event(start = time(18, 00),)
 
 session(
   track  = HPCA_track_1,
+  room   = 'Europa 4',
   start  = time(19, 15),
   end    = time(20, 15),
   events = [
@@ -1799,6 +1895,7 @@ session(
 
 session(
   track  = CGO_track_1,
+  room   = 'Europa 2',
   start  = time(18, 00),
   end    = time(19, 00),
   events = [event(title="CGO Business Meeting")]
@@ -1806,6 +1903,7 @@ session(
 
 session(
   track  = PPoPP_track_1,
+  room   = 'Europa 3',
   start  = time(18, 00),
   end    = time(19, 00),
   events = [event(title="PPoPP Business Meeting")]
