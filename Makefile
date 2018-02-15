@@ -9,7 +9,7 @@ clean:
 	-rm -r __pycache__
 
 program.html: $(INPUTS)
-	python3 make_joint_program.py --hide-people --font-size=10 -o program.html
+	python3 make_joint_program.py --hide-people --font-size=9 -o program.html
 
 program-embed.html: $(INPUTS)
 	python3 make_joint_program.py --hide-people --font-size=9 --embeddable -o program-embed.html

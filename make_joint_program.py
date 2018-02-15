@@ -76,7 +76,7 @@ joint_event(
   start = time(8, 0), end = time(18, 15),
 )
 joint_event(
-  title = 'Coffee Break',
+  title = 'Coffee Break with Snack',
   start = time(10, 0), end = time(10, 30),
 )
 joint_event(
@@ -84,7 +84,7 @@ joint_event(
   start = time(12, 0), end = time(13, 30),
 )
 joint_event(
-  title = 'Coffee Break',
+  title = 'Coffee Break with Snack',
   start = time(15, 0), end = time(15, 30),
 )
 joint_event(
@@ -241,41 +241,64 @@ session(
 )
 session(
   track  = HPCA_track_2,
-  title  = "HIPINEB: High-Performance Interconnection Networks in the Exascale and Big-Data Era",
-  link   = "http://hipineb.i3a.info/hipineb2018/",
+  title  = "HIPINEB Technical Session 1 (research papers)",
   start  = time(10, 30),
   end    = time(12, 00),
   room   = 'Europa 7',
   events = [
     event(
-      title  = 'Technical Session 1 (research papers)',
+      title  = 'Analysis and improvement of Valiant routing in low-diameter networks',
+      people = ['Mariano Benito, Pablo Fuentes, Enrique Vallejo and Ramon Beivide (University of Cantabria, Spain)'],
+    ),
+    event(
+      title  = 'Node-type-based load-balancing routing for Parallel Generalized Fat-Trees',
+      people = ['John Gliksberg, Jean-Noël Quintin and Pedro Javier García García (Atos BULL, France)'],
+    ),
+    event(
+      title  = 'Analyzing topology parameters for achieving energy-efficient k-ary n-cubes',
+      people = ['Francisco J. Andújar, Salvador Coll, Marina Alonso, Juan-Miguel Martínez, Pedro López, Francisco J. Alfaro, Jose L. Sánchez and Raúl Martínez (Technical University of Valencia, Spain)'],
     ),
   ],
 )
 session(
   track  = HPCA_track_2,
-  title  = "HIPINEB: High-Performance Interconnection Networks in the Exascale and Big-Data Era",
-  link   = "http://hipineb.i3a.info/hipineb2018/",
+  title  = 'HIPINEB Technical Session 2 (research papers)',
   start  = time(13, 30),
   end    = time(15, 00),
   room   = 'Europa 7',
   events = [
     event(
-      title  = 'Technical Session 2 (research papers)',
+      title  = 'Evaluating Energy Saving Strategies on Torus, K-Ary N-Tree, and Dragonfly',
+      people = ['Felix Zahn, Armin Schäffer and Holger Fröning (Ruprecht-Karls University of Heidelberg, Germany)'],
+    ),
+    event(
+      title  = 'VEF3 traces: towards a complete framework for modelling network workloads for exascale systems',
+      people = ['Javier Cano-Cano, Francisco J. Andújar, Francisco J. Alfaro and Jose L. Sánchez (University of Castilla-La Mancha, Spain)'],
+    ),
+    event(
+      title  = 'Improving the Efficiency of Future Exascale Systems with rCUDA',
+      people = ['Carlos Reaño, Javier Prades and Federico Silla (Technical University of Valencia, Spain)'],
+    ),
+    event(
+      title  = '',
+      people = [''],
     ),
   ],
 )
 session(
   track  = HPCA_track_2,
-  title  = "HIPINEB: High-Performance Interconnection Networks in the Exascale and Big-Data Era",
-  link   = "http://hipineb.i3a.info/hipineb2018/",
+  title  = 'Panel Session: "Industrial perspective of high-speed communication technology evolution"',
   start  = time(15, 30),
   end    = time(17, 00),
   room   = 'Europa 7',
   events = [
     event(
-      title  = 'Panel Session: "Industrial perspective of high-speed communication technology evolution"',
-      people = ['moderated by Prof. Young Cho (University of Southern California)'],
+      title  = 'Industrial perspective of high-speed communication technology evolution',
+      people = ['moderated by Prof. Young Cho (University of Southern California)',
+                'Panelists: '
+                'Eitan Zahavi, Mellanox Technologies, Israel, '
+                'Ola Torudbakken, Skala Norge AS, Norway, '
+                'Cyriel Minkenberg, Rockley Photonics Inc., Switzrland'],
       important_people = True,
     ),
   ],
@@ -636,7 +659,7 @@ joint_event(
   start = time(8, 0), end = time(18, 30),
 )
 joint_event(
-  title = 'Coffee Break',
+  title = 'Coffee Break with Snack',
   start = time(10, 0), end = time(10, 30),
 )
 joint_event(
@@ -644,7 +667,7 @@ joint_event(
   start = time(12, 0), end = time(13, 30),
 )
 joint_event(
-  title = 'Coffee Break',
+  title = 'Coffee Break with Snack',
   start = time(15, 0), end = time(15, 30),
 )
 joint_event(
@@ -1418,7 +1441,7 @@ joint_event(
   important_people = True,
 )
 joint_event(
-  title = 'Coffee Break',
+  title = 'Coffee Break with Snack',
   start = time(9, 55), end = time(10, 20),
 )
 joint_event(
@@ -1426,7 +1449,7 @@ joint_event(
   start = time(11, 45), end = time(13, 15),
 )
 joint_event(
-  title = 'Coffee Break',
+  title = 'Coffee Break with Snack',
   start = time(14, 55), end = time(15, 15),
 )
 joint_event(
@@ -1940,7 +1963,7 @@ joint_event(
   start = time(8, 0), end = time(17, 0),
 )
 joint_event(
-  title = 'Coffee Break',
+  title = 'Coffee Break with Snack',
   start = time(9, 40), end = time(10, 5),
 )
 joint_event(
@@ -1968,7 +1991,7 @@ joint_event(
   important_people = True,
 )
 joint_event(
-  title = 'Coffee Break',
+  title = 'Coffee Break with Snack',
   start = time(14, 25), end = time(14, 50),
 )
 joint_event(
@@ -2401,7 +2424,7 @@ joint_event(
   important_people = True,
 )
 joint_event(
-  title = 'Coffee Break',
+  title = 'Coffee Break with Snack',
   start = time(9, 0), end = time(9, 25),
 )
 joint_event(
