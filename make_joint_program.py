@@ -1453,7 +1453,7 @@ joint_event(
   start = time(14, 55), end = time(15, 15),
 )
 joint_event(
-  title = 'Coffee Break',
+  title = 'Break',
   start = time(16, 55), end = time(17, 15),
 )
 
@@ -2428,7 +2428,7 @@ joint_event(
   start = time(9, 0), end = time(9, 25),
 )
 joint_event(
-  title = 'Coffee Break',
+  title = 'Break',
   start = time(11, 5), end = time(11, 20),
 )
 
