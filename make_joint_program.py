@@ -306,27 +306,35 @@ session(
 
 session(
   track  = CGO_track_1,
-  title  = "LLVM Tutorial",
-  link   = "http://llvm.org/devmtg/2018-02-24/",
-  start  = time(8, 30),
+  title  = "LLVM Performance Workshop",
+  link   = "https://llvm.org/devmtg/2018-02-24/",
+  start  = time(9, 15),
   end    = time(10, 00),
   room   = 'Europa 2',
   events = [
     event(
-      title  = "Tutorial 1",
+      title  = 'How to Evaluate "In-Memory Computing" Performances without Hardware Measurements?',
+      link   = 'https://llvm.org/devmtg/2018-02-24/#mk',
     ),
   ],
 )
 session(
   track  = CGO_track_1,
-  title  = "LLVM Tutorial",
-  link   = "http://llvm.org/devmtg/2018-02-24/",
+  title  = "LLVM Performance Workshop",
+  link   = "https://llvm.org/devmtg/2018-02-24/",
   start  = time(10, 30),
   end    = time(12, 00),
   room   = 'Europa 2',
   events = [
     event(
-      title  = "Tutorial 2",
+      title  = 'Optimizing LLVM IR for Guided Vectorization',
+      link   = 'https://llvm.org/devmtg/2018-02-24/#apg',
+      people = ['Arsène Pérard-Gayot'],
+    ),
+    event(
+      title  = 'Efficient use of memory by reducing size of AST dumps in cross file analysis by clang static analyzer',
+      link   = 'https://llvm.org/devmtg/2018-02-24/#sss',
+      people = ['Siddharth Shankar Swain'],
     ),
   ],
 )
@@ -339,7 +347,14 @@ session(
   room   = 'Europa 2',
   events = [
     event(
-      title  = "Session 1",
+      title  = 'Cache-aware Scheduling and Performance Modeling with LLVM-Polly and Kerncraft',
+      link   = 'https://llvm.org/devmtg/2018-02-24/#jh',
+      people = ['Julian Hammer'],
+    ),
+    event(
+      title  = 'Enabling Automatic Partitioning of Data-Parallel Kernels with Polyhedral Compilation',
+      link   = 'https://llvm.org/devmtg/2018-02-24/#am',
+      people = ['Alexander Matz'],
     ),
   ],
 )
@@ -351,7 +366,14 @@ session(
   end    = time(17, 00),
   room   = 'Europa 2',
   events = [
-    event(title = "Session 2"),
+    event(
+      title  = 'Tensor Comprehensions',
+      link   = 'https://llvm.org/devmtg/2018-02-24/#wm',
+      people = ['William Moses'],
+    ),
+    event(
+      title  = 'LLVM Q&A Panel: Questions Welcome',
+    ),
   ],
 )
 
