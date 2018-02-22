@@ -1743,8 +1743,21 @@ session(
 
 session(
   track  = CGO_track_1,
-  title  = "Session 3: Best Paper Finalists",
+  title  = "Test of Time Award Session",
   start  = time(15, 15),
+  end    = time(15, 25),
+  room   = 'Europa 2',
+  events = [
+    event(
+      title = 'CGO Test of Time Award',
+    ),
+  ],
+)
+
+session(
+  track  = CGO_track_1,
+  title  = "Session 3: Best Paper Finalists",
+  start  = time(15, 25),
   end    = time(16, 55),
   room   = 'Europa 2',
   events = [
@@ -2606,6 +2619,20 @@ session(
 )
 
 session(
+  track  = CGO_track_1,
+  title  = "Best Paper Award Session",
+  start  = time(12, 35),
+  end    = time(12, 45),
+  room   = 'Europa 2',
+  events = [
+    event(
+      title  = "CGO 2018 Best Paper Award",
+    ),
+  ],
+)
+
+
+session(
   track  = PPoPP_track_1,
   title  = "Session 7: Parallel frameworks and applications",
   start  = time(9, 25),
@@ -2690,7 +2717,7 @@ session(
 )
 session(
   track  = CGO_track_1,
-  start  = time(12, 35),
+  start  = time(12, 45),
   events = [
     event(title = "CGO Closing"),
   ],
