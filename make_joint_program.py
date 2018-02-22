@@ -2716,6 +2716,13 @@ if __name__ == '__main__':
 
   parser.add_argument('--font-size', type=int, default=12)
 
+  parser.add_argument(
+    '--in-table-page-breaks',
+    action='store_true', default=False,
+    help='split tables after joint events with "page_breaker" set to true '
+         'to control where page breaks occur (off by default)'
+  )
+
   full_page = parser.add_mutually_exclusive_group()
 
   full_page.add_argument('--full-page',  action="store_true", default=True)
@@ -2738,11 +2745,16 @@ if __name__ == '__main__':
 
   saturday, sunday, monday, tuesday, wednesday = slice_per_day(PROGRAM)
 
-  h.print_day(saturday,  show_people=args.show_people, time_column=False)
-  h.print_day(sunday,    show_people=args.show_people, time_column=False)
-  h.print_day(monday,    show_people=args.show_people, time_column=True)
-  h.print_day(tuesday,   show_people=args.show_people, time_column=True)
-  h.print_day(wednesday, show_people=args.show_people, time_column=True)
+  common_args = dict(
+    show_people          = args.show_people,
+    honour_page_breakers = args.in_table_page_breaks,
+  )
+
+  h.print_day(saturday,  **common_args, time_column=False)
+  h.print_day(sunday,    **common_args, time_column=False)
+  h.print_day(monday,    **common_args, time_column=True)
+  h.print_day(tuesday,   **common_args, time_column=True)
+  h.print_day(wednesday, **common_args, time_column=True)
 
   h.print_program_footer()
 

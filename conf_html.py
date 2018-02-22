@@ -21,14 +21,17 @@ NBSP = "\u00A0"
 
 
 def print_program(program: Program, dst: typing.IO[str] = sys.stdout, *,
-                  show_people: bool, font_size: int, full_page: bool):
+                  show_people: bool, font_size: int, full_page: bool,
+                  time_column: bool, honour_page_breakers: bool):
   """
     print HTML for program to stream.
 
     Parameters:
-      :show_people   show names of people associated with a talk in the table.
-      :font_size     font size to use (in pt)
-      :full_page     whether to generate a standalone page or just a embeddable <div>
+      :show_people         show names of people associated with a talk in the table.
+      :font_size           font size to use (in pt)
+      :full_page           whether to generate a standalone page or just a embeddable <div>
+      :honour_page_breakers whether to split tables & insert page breaks after joint events
+                           with 'page_breaker=True'
   """
 
   h = HTML(dst)
@@ -39,7 +42,8 @@ def print_program(program: Program, dst: typing.IO[str] = sys.stdout, *,
   h.print_program_header(font_size=font_size)
 
   for day in slice_per_day(program):
-    h.print_day(day, show_people=show_people)
+    h.print_day(day, show_people=show_people, time_column=time_column,
+                honour_page_breakers=honour_page_breakers)
 
   h.print_program_footer()
 
@@ -189,13 +193,14 @@ class HTML:
     h.text(txt)
     h.close('h2')
 
-  def print_day(self, day, *, show_people: bool, time_column: bool = True):
+  def print_day(self, day, *, show_people: bool, time_column: bool,
+                honour_page_breakers: bool):
     """
       print HTML table for one day.
 
       params:
-        :show_people show people associated with events
-        :time_column whether to put session times into their own column
+        :day  a Program for one day
+        flag args have same meaning as in print_program()
     """
 
     assert len(list(day.conferences)), [s.title for s in day.joint_events]
@@ -416,7 +421,7 @@ class HTML:
           h.open('td', colspan=cols)
           h.close('td')
 
-        if joint.page_breaker:
+        if honour_page_breakers and joint.page_breaker:
           h.open('tr')
           h.open('td', "class='border-top'", colspan=num_cols)
           h.close('td')
@@ -426,7 +431,6 @@ class HTML:
           self.page_break()
           h.open('table')
           h.open('tbody')
-
 
     h.open('tr', f'class="border-top"')
     h.open('td', colspan=num_cols)
