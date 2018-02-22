@@ -376,7 +376,7 @@ session(
     ),
   ],
 )
-
+  
 session(
   track  = CGO_track_2,
   title  = "RWDSL'18: 3rd International Workshop on Real World Domain Specific Languages",
@@ -696,6 +696,11 @@ joint_event(
 joint_event(
   title = 'HPCA/CGO/PPoPP Welcome Reception and Poster Session',
   start = time(18, 00),
+)
+joint_event(
+  title = 'Women-in-Computer-Architecture (WICARCH) get-together',
+  start = time(19, 45),
+  room  = 'Anthony’s Bar',
 )
 
 session(
