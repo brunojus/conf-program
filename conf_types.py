@@ -216,6 +216,8 @@ class Joint_Event(Struct):
     ('people',           Optional[str], None),
     ('room',             Optional[str], None),
     ('important_people', bool, False),
+    ## breaks page when printing, the hackiest of hacks
+    ('page_breaker', bool, False),
   )
 
   def _post_init(self):

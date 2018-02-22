@@ -669,6 +669,7 @@ joint_event(
 joint_event(
   title = 'Coffee Break with Snack',
   start = time(15, 0), end = time(15, 30),
+  page_breaker = True,
 )
 joint_event(
   title = 'HPCA/CGO/PPoPP Welcome Reception and Poster Session',

@@ -416,6 +416,18 @@ class HTML:
           h.open('td', colspan=cols)
           h.close('td')
 
+        if joint.page_breaker:
+          h.open('tr')
+          h.open('td', "class='border-top'", colspan=num_cols)
+          h.close('td')
+          h.close('tr')
+          h.close('tbody')
+          h.close('table')
+          self.page_break()
+          h.open('table')
+          h.open('tbody')
+
+
     h.open('tr', f'class="border-top"')
     h.open('td', colspan=num_cols)
     h.close('td')
