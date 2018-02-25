@@ -752,6 +752,7 @@ session(
   title  = "WP3: New/Exploratory paradigms",
   start  = time(11, 20),
   end    = time(12, 00),
+  room   = 'Europa 5',
   events = [
     event(
       title  = "A Multi-component Branch Predictor Design for Low Resource Budget Processors",
@@ -770,6 +771,7 @@ session(
   link   = 'http://wp3workshop.website/',
   start  = time(13, 20),
   end    = time(14, 20),
+  room   = 'Europa 5',
   events = [
     event(
       title  = 'Keynote II: TBD',
@@ -783,6 +785,7 @@ session(
   title  = "WP3: Restrospective Survey II",
   start  = time(14, 20),
   end    = time(15, 00),
+  room   = 'Europa 5',
   events = [
     event(
       title  = 'This Architecture Tastes Like Microarchitecture',
@@ -800,6 +803,7 @@ session(
   title  = "WP3: Restrospective Survey III",
   start  = time(15, 30),
   end    = time(15, 50),
+  room   = 'Europa 5',
   events = [
     event(
       title  = '45-year CPU evolution: one law and two equations',
@@ -813,6 +817,7 @@ session(
   title  = "WP3: Panel Session",
   start  = time(15, 30),
   end    = time(15, 50),
+  room   = 'Europa 5',
   events = [
     event(
       title  = 'Panel TBD',
@@ -826,6 +831,7 @@ session(
   title  = "WP3: Recap/discussion; clossing remarks, action items",
   start  = time(15, 30),
   end    = time(15, 50),
+  room   = 'Europa 5',
   events = [
     event(
       title  = 'Discussion driven by workshop organizers.',
@@ -1377,7 +1383,7 @@ session(
   title  = "Session 4: Compilation for Specialised Domains",
   link   = "https://cc-conference.github.io/18/program/",
   start  = time(10, 30),
-  end    = time(13, 00),
+  end    = time(12, 00),
   room   = 'Europa 1',
   events = [
     event(
@@ -1940,31 +1946,46 @@ session(
 )
 
 session(
-  track  = CGO_track_1,
-  title  = 'CGO & PPoPP Artifact Evaluation',
+  track  = PPoPP_track_1,
+  # title  = 'CGO & PPoPP Artifact Evaluation',
   start  = time(17, 15),
   end    = time(17, 45),
   room   = 'Europa 3',
   events = [
-    event(title = 'CGO & PPoPP Artifact Evaluation')
+    event(title = 'CGO & PPoPP Artifact Evaluation'),
+    event(title = ''), # ugly hack to make program prettier
+    event(title = ' '), # ugly hack to make program prettier
+  ],
+)
+
+session(
+  track  = CGO_track_2,
+  # title  = 'CGO & PPoPP Artifact Evaluation',
+  start  = time(17, 15),
+  end    = time(17, 45),
+  room   = 'Europa 3',
+  events = [
+    event(title = 'CGO & PPoPP Artifact Evaluation'),
+    event(title = ''), # ugly hack to make program prettier
+    event(title = ' '), # ugly hack to make program prettier
   ],
 )
 
 
 session(
-  track  = PPoPP_track_1,
-  title  = 'CGO & PPoPP Artifact Evaluation',
-  start  = time(17, 15),
-  end    = time(17, 45),
-  room   = 'Europa 3',
+  track  = CGO_track_1,
+  # title  = 'Student Research Competition',
+  start  = time(17, 0),
+  end    = time(19, 0),
+  room   = 'Europa 7',
   events = [
-    event(title = 'CGO & PPoPP Artifact Evaluation')
+    event(title = 'Student Research Competition')
   ],
 )
 
 
 # fake joint event to seperate sessions & business meetings
-joint_event(start = time(18, 00),)
+# joint_event(start = time(18, 00),)
 
 session(
   track  = HPCA_track_1,
@@ -1977,7 +1998,7 @@ session(
 )
 
 session(
-  track  = CGO_track_1,
+  track  = CGO_track_2,
   room   = 'Europa 2',
   start  = time(18, 00),
   end    = time(19, 00),
